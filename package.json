@@ -1,0 +1,27 @@
+{
+  "name": "memoryleck",
+  "version": "1.0.0",
+  "description": "property managment website: display and keep track of your porperties",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Priscilaaris94/memoryleck.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Priscilaaris94/memoryleck/issues"
+  },
+  "homepage": "https://github.com/Priscilaaris94/memoryleck#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mysql": "^2.15.0",
+    "node": "^9.8.0"
+  }
+}
