@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     state: DataTypes.STRING,
     zip: DataTypes.STRING,
     beds: DataTypes.STRING,
-    bath: DataTypes.STRING,
+    baths: DataTypes.STRING,
     sqfeet: DataTypes.STRING,
     price: DataTypes.STRING,
     status: DataTypes.STRING,
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     // TO DO...
     // property has one owner 
     Property.hasOne(models.User, {
-      onDelete: "cascade"
+      onDelete: "SET NULL"
     });
 
     // TO DO...
