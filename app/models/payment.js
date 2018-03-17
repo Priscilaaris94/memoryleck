@@ -4,8 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     tenant: DataTypes.STRING,
     property: DataTypes.STRING,
     amount: DataTypes.STRING,
-    method: DataTypes.STRING,
-    property: DataTypes.STRING,
+    method: DataTypes.STRING
   });
 
   Payment.associate = function(models) {
@@ -15,7 +14,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
-    // property has one owner 
     Property.hasOne(models.User, {
       onDelete: "SET NULL"
     });
