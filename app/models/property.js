@@ -25,7 +25,15 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "SET NULL"
     });
 
+    Property.hasMany(models.Request, {
+      onDelete: "SET NULL"
+    });
+
     Property.hasMany(models.Image, {
+      onDelete: "SET NULL"
+    });
+
+    Property.hasMany(models.Payment, {
       onDelete: "SET NULL"
     });
   };
