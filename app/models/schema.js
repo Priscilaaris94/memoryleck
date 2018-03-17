@@ -25,8 +25,10 @@ CREATE TABLE user (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
     email VARCHAR(255),
+    uid VARCHAR(255),
     type ENUM('landlord', 'tenant') DEFAULT 'tenant',
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+    CONSTRAINT user_type UNIQUE(uid, type)
 );
 
 CREATE TABLE property (
@@ -47,7 +49,6 @@ CREATE TABLE property (
 	FOREIGN KEY (owner_id) REFERENCES user(id),
 	FOREIGN KEY (tenant_id) REFERENCES user(id)
 );
-
 
 CREATE TABLE request (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -81,7 +82,8 @@ CREATE TABLE payment (
 	method VARCHAR(255),
 	PRIMARY KEY (id),
 	FOREIGN KEY (property) REFERENCES property(id),
-	FOREIGN KEY (tenant) REFERENCES user(id)
+	FOREIGN KEY (tenant) REFERENCES user(id),
+    CONSTRAINT single_payment UNIQUE(date, property)
 );
 `;
 

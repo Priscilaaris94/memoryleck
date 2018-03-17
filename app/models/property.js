@@ -1,5 +1,4 @@
-let Propery = function(address_one, address_two, city, state, zip, beds, baths, sqfeet
-price, status, owner = '', ){
+let Property = function(address_one, address_two, city, state, zip, beds, baths, sqfeet, price, status, owner = '', tenant = ''){
   this.address_one = address_one;
   this.address_two = address_two;
   this.city = city;
