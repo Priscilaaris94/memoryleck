@@ -4,7 +4,7 @@
   "description": "property managment website: display and keep track of your porperties",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "repository": {
@@ -22,5 +22,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "mysql": "^2.15.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.0.0"
   }
 }
