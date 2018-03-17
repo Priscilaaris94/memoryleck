@@ -1,10 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
   var Request = sequelize.define("Request", {
     issue_title: DataTypes.STRING,
-    issue_desc: DataTypes.STRING,
-    date_started: DataTypes.STRING,
+    issue_desc: DataTypes.TEXT,
+    date_started: DataTypes.DATE,
     contact_name: DataTypes.STRING,
-    contact_phone: DataTypes.STRING,
+    contact_phone: DataTypes.INTEGER,
     status: DataTypes.STRING
   });
 

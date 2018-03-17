@@ -4,34 +4,30 @@ module.exports = function(sequelize, DataTypes) {
     address_two: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    zip: DataTypes.STRING,
-    beds: DataTypes.STRING,
-    baths: DataTypes.STRING,
-    sqfeet: DataTypes.STRING,
-    price: DataTypes.STRING,
-    status: DataTypes.STRING,
-    tenant: DataTypes.STRING,
-    images: DataTypes.STRING
+    zip: DataTypes.INTEGER,
+    beds: DataTypes.INTEGER,
+    baths: DataTypes.INTEGER,
+    sqfeet: DataTypes.INTEGER,
+    price: DataTypes.DECIMAL,
+    status: DataTypes.STRING, // DataTypes.ENUM('one', 'two', 'three', ...)
   });
 
   Property.associate = function(models) {
     Property.belongsTo(models.User, {
+      as: 'Landlord',
       foreignKey: {
         allowNull: true
       }
     });
 
-    // TO DO...
-    // property has one owner 
     Property.hasOne(models.User, {
+      as: 'Tenant',
       onDelete: "SET NULL"
     });
 
-    // TO DO...
-    // property has one tenet
-    // Users.hasOne(models.Property, {
-    //   onDelete: "cascade"
-    // });
+    Property.hasMany(models.Image, {
+      onDelete: "SET NULL"
+    });
   };
 
   return Property;
