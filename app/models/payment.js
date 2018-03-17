@@ -1,23 +1,10 @@
-module.exports = function(sequelize, DataTypes) {
-  var Payment = sequelize.define("Payment", {
-    date: DataTypes.STRING,
-    tenant: DataTypes.STRING,
-    property: DataTypes.STRING,
-    amount: DataTypes.STRING,
-    method: DataTypes.STRING
-  });
+let Payment = function(date, tenant, property, amount, method, user = ''){
+  this.date = date;
+  this.tenant = tenant;
+  this.property = property;
+  this.amount = amount;
+  this.method = method;
+  this.user = user;
+}
 
-  Payment.associate = function(models) {
-    Payment.belongsTo(models.Property, {
-      foreignKey: {
-        allowNull: true
-      }
-    });
-
-    Property.hasOne(models.User, {
-      onDelete: "SET NULL"
-    });
-  };
-
-  return Payment;
-};
+module.exports = Payment;
