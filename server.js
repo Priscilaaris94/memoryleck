@@ -1,25 +1,65 @@
+//Dependencies
+
+var express = require("express");
+
+var bodyParser = require("body-parser");
+
+
+
+//Define port the server will be listening on.
+
 var PORT = process.env.PORT || 3000;
 
-// Sets up the Express app to handle data parsing
+
+
+var app = express();
+
+
+
+//Serve static content for the app from the "public" directory in the application directory.
+
+app.use(express.static(__dirname + '/public'));
+
+
+
+//Parse application/x-www-form-urlencoded
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+
+//Parse application/json
+
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/app')); 
 
 
-// ROUTER
+//Set Handlebars.
 
-// The below points our server to a series of "route" files.
-
-// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
+var exphbs = require("express-handlebars");
 
 
 
-// Starts the server to begin listening
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+
+app.set("view engine", "handlebars");
+
+
+
+// Import routes and give the server access to them.
+
+var routes = require("./controllers/appController.js");
+
+
+
+app.use(routes);
+
+
+
+//App is listening...
 
 app.listen(PORT, function() {
 
-  console.log("Listing to this port" + PORT);
+  console.log("App now listening at localhost:" + PORT);
+
 });
