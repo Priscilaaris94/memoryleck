@@ -23,7 +23,8 @@ else {
     port: 3306,
     user: "admin",
     password: "password1",
-    database: "my_database"
+    database: "my_database",
+    multipleStatements: true
   });
 
 }

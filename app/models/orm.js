@@ -51,7 +51,13 @@ let orm = function(connection){
 
 	this.getTenantProperties = function(tenant_id, cb){
 		let query = `
-		SELECT *
+		SELECT property.*, image.src
+		FROM property
+		LEFT OUTER JOIN image
+		ON property.id = image.id
+		WHERE property.tenant_id = ${tenant_id}
+		;
+		SELECT request.*
 		FROM property
 		LEFT OUTER JOIN request
 		ON property.id = request.property_id
@@ -59,7 +65,7 @@ let orm = function(connection){
 		ON property.id = image.id
 		WHERE property.tenant_id = ${tenant_id}
 		;
-		SELECT *
+		SELECT payment.*
 		FROM property
 		LEFT OUTER JOIN payment 
 		ON property.id = payment.property_id
@@ -75,23 +81,23 @@ let orm = function(connection){
 		let query = `
 		SELECT *
 		FROM property
+		LEFT OUTER JOIN image
+		ON property.id = image.id
+		WHERE property.landlord_id = ${landlord_id}
+		;
+		SELECT payment.*
+		FROM property
 		LEFT OUTER JOIN payment 
 		ON property.id = payment.property_id
 		WHERE property.landlord_id = ${landlord_id}
 		AND property.tenant_id = payment.tenant_id
 		;
-		SELECT *
+		SELECT request.*
 		FROM property
 		LEFT OUTER JOIN request
 		ON property.id = request.property_id
 		WHERE property.landlord_id = ${landlord_id}
 		AND property.tenant_id = request.logged_by
-		;
-		SELECT *
-		FROM property
-		LEFT OUTER JOIN image
-		ON property.id = image.id
-		WHERE property.landlord_id = ${landlord_id}
 		;
 		`;
 		connection.query(query, function(err, res){

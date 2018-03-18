@@ -68,8 +68,9 @@ router.route("/payment")
    });
 });
 
-/*// POST request 
-app.post("/api/request", function(req, res) {
+// POST request 
+router.route("/request")
+.post(function(req, res) {
   if(!req.body.request){return res.send("Bad request")}
   let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
   
@@ -79,7 +80,8 @@ app.post("/api/request", function(req, res) {
 });
 
 // PUT request 
-app.put("/api/request/:id", function(req, res) {
+router.route("/request/:id")
+.put(function(req, res) {
   if(!req.body.request){return res.send("Bad request")}
   let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
   
@@ -89,14 +91,15 @@ app.put("/api/request/:id", function(req, res) {
 });
 
 // POST a user 
-app.post("/api/user", function(req, res) {
+router.route("/user")
+.post(function(req, res) {
   if(!req.body.user){return res.send("Bad request")}
   let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
   
   orm.postUser(user, function(){
     res.redirect(redirectto);
   });
-});*/
+});
 
 
 // Export
