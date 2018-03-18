@@ -18,7 +18,6 @@ var users = require("../models/users.js");
 
 router.get("/", function(req, res) {
 
-<<<<<<< HEAD
     index.all(function(data) {
 
         var Object = {
@@ -81,6 +80,3 @@ router.put("/api/properties/:id", function(req, res) {
 
 // Export routes for server.js to use.
 module.exports = router;
-=======
-});
->>>>>>> ff865c35f2931ed8667225a6fbce111e76c00fe2
