@@ -5,8 +5,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">
-		body{
-			display: flex;
+	body{
+		margin: 2em;
+		padding: 2em;
+	}
+		label, input{
+			display: block;
 		}
 	</style>
 </head>
@@ -25,18 +29,32 @@
 <br> -->
 <h4>Add Property</h4>
 <form id="form-post-property" action="/api/property" method="post">
+	<label>address_one</label>
 	<input type="text" name="address_one" placeholder="address_one" value="321 Test">
+	<label>address_two</label>
 	<input type="text" name="address_two" placeholder="address_two" value="">
+	<label>city</label>
 	<input type="text" name="city" placeholder="city" value="Atlanta">
+	<label>state</label>
 	<input type="text" name="state" placeholder="state" value="GA">
+	<label>zip</label>
 	<input type="number" name="zip" placeholder="zip" value="30303">
+	<label>beds</label>
 	<input type="number" name="beds" placeholder="beds" value="2">
+	<label>baths</label>
 	<input type="number" name="baths" placeholder="baths" value="2">
+	<label>sqfeet</label>
 	<input type="number" name="sqfeet" placeholder="sqfeet" value="800">
+	<label>price</label>
 	<input type="number" name="price" placeholder="price" value="800">
+	<label>status</label>
 	<input type="text" name="status" placeholder="status" value="vacant">
-	<input type="text" name="owner_id" placeholder="owner_id" value="3">
-	<input type="text" name="tenant_id" placeholder="tenant_id" value="4">
+	<label>landlord_id</label>
+	<input type="text" name="landlord_id" placeholder="landlord_id">
+	<label>tenant_id</label>
+	<input type="text" name="tenant_id" placeholder="tenant_id">
+	<code>Valid tenant id: 92077MxCcJqOnWv | valid landlord id: 92112AlAiYnQjMa</code>
+	<code>Try localStorage.setItem('user', '92112AlAiYnQjMa')</code>
 	<input type="submit">
 </form>
 <br>

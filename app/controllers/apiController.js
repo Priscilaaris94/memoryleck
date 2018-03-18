@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 // Middleware
 // =============================================================
 app.use(bodyParser.json());
-const parseUrlencoded = bodyParser.urlencoded({extended: true});
+const parseUrlencoded = bodyParser.urlencoded({extended: false});
 
 
 // ORM / DB Connection
@@ -28,7 +28,7 @@ router.route("/property")
 })
 .post(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
-   orm.postProperty(req.body.property, function(){
+   orm.postProperty(JSON.parse(req.body.property), function(){
     res.redirect('/landlord-home');
    });
 });
