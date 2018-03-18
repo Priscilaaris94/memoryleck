@@ -1,7 +1,7 @@
 let orm = function(connection){
 	////////////////////////////////////////////////////////////////
 	// Property Post and update
-	this.postProperty(property, cb){
+	this.postProperty = function(property, cb){
 		connection.query(`INSERT INTO property SET ?`, property, function(err, res){
 				console.log(err);
 				console.log(res);
@@ -9,7 +9,7 @@ let orm = function(connection){
 			});
 	}
 
-	this.updateProperty(updates, property_id, cb){
+	this.updateProperty = function(updates, property_id, cb){
 		connection.query(`UPDATE property SET ? WHERE ?`, 
 			[updates, {id: property_id}],
 			function(err, res){
@@ -21,7 +21,7 @@ let orm = function(connection){
 
 	////////////////////////////////////////////////////////////////
 	// Images
-	this.postImage(image, cb){
+	this.postImage = function(image, cb){
 		connection.query(`INSERT INTO image SET ?`, image, function(err, res){
 			console.log(err);
 			console.log(res);
@@ -32,7 +32,7 @@ let orm = function(connection){
 	////////////////////////////////////////////////////////////////
 	// Property Queries
 
-	this.getVacantProperty(cb){
+	this.getVacantProperty = function(cb){
 		let query = `
 		SELECT property.*, image.src 
 		FROM property 
@@ -49,7 +49,7 @@ let orm = function(connection){
 		});
 	}
 
-	this.getTenantProperties(tenant_id, cb){
+	this.getTenantProperties = function(tenant_id, cb){
 		let query = `
 		SELECT *
 		FROM property
@@ -71,7 +71,7 @@ let orm = function(connection){
 		});
 	}
 
-	this.getLandlordProperties(landlord_id, cb){
+	this.getLandlordProperties = function(landlord_id, cb){
 		let query = `
 		SELECT *
 		FROM property
@@ -102,7 +102,7 @@ let orm = function(connection){
 
 	////////////////////////////////////////////////////////////////
 	// Maintenance Requests
-	this.postRequest(request, cb){
+	this.postRequest = function(request, cb){
 		connection.query(`REPLACE INTO request SET ?`, request, function(err, res){
 			console.log(err);
 			console.log(res);
@@ -113,7 +113,7 @@ let orm = function(connection){
 	////////////////////////////////////////////////////////////////
 	// Payments
 
-	this.postPayment(payment, cb){
+	this.postPayment = function(payment, cb){
 		connection.query(`REPLACE INTO payment SET ?`, payment, function(err, res){
 			console.log(err);
 			console.log(res);
@@ -124,7 +124,7 @@ let orm = function(connection){
 	////////////////////////////////////////////////////////////////
 	// Users
 	
-	this.postUser(user, cb){
+	this.postUser = function(user, cb){
 		connection.query(`REPLACE INTO user SET ?`, user, function(err, res){
 			console.log(err);
 			console.log(res);
