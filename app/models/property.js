@@ -1,42 +1,16 @@
-module.exports = function(sequelize, DataTypes) {
-  var Property = sequelize.define("Property", {
-    address_one: DataTypes.STRING,
-    address_two: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    zip: DataTypes.INTEGER,
-    beds: DataTypes.INTEGER,
-    baths: DataTypes.INTEGER,
-    sqfeet: DataTypes.INTEGER,
-    price: DataTypes.DECIMAL,
-    status: DataTypes.STRING, // DataTypes.ENUM('one', 'two', 'three', ...)
-  });
-
-  Property.associate = function(models) {
-    Property.belongsTo(models.User, {
-      as: 'Landlord',
-      foreignKey: {
-        allowNull: true
-      }
-    });
-
-    Property.hasOne(models.User, {
-      as: 'Tenant',
-      onDelete: "SET NULL"
-    });
-
-    Property.hasMany(models.Request, {
-      onDelete: "SET NULL"
-    });
-
-    Property.hasMany(models.Image, {
-      onDelete: "SET NULL"
-    });
-
-    Property.hasMany(models.Payment, {
-      onDelete: "SET NULL"
-    });
-  };
-
-  return Property;
+let Property = function(address_one, address_two, city, state, zip, beds, baths, sqfeet, price, status, owner = '', tenant = ''){
+  this.address_one = address_one;
+  this.address_two = address_two;
+  this.city = city;
+  this.state = state;
+  this.zip = zip;
+  this.beds = beds;
+  this.baths = baths;
+  this.sqfeet = sqfeet;
+  this.price = price;
+  this.status = status;
+  this.owner = owner || '';
+  this.tenant = tenant || '';
 };
+
+module.exports = Propery;
