@@ -55,7 +55,7 @@ let orm = function(connection){
 		FROM property
 		LEFT OUTER JOIN image
 		ON property.id = image.id
-		WHERE property.tenant_id = ${tenant_id}
+		WHERE property.tenant_id = ?
 		;
 		SELECT request.*
 		FROM property
@@ -63,16 +63,16 @@ let orm = function(connection){
 		ON property.id = request.property_id
 		LEFT OUTER JOIN image
 		ON property.id = image.id
-		WHERE property.tenant_id = ${tenant_id}
+		WHERE property.tenant_id = ?
 		;
 		SELECT payment.*
 		FROM property
 		LEFT OUTER JOIN payment 
 		ON property.id = payment.property_id
-		WHERE property.tenant_id = ${tenant_id}
+		WHERE property.tenant_id = ?
 		;
 		`;
-		connection.query(query, function(err, res){
+		connection.query(query, tenant_id, function(err, res){
 			cb(res);
 		});
 	}
@@ -83,24 +83,24 @@ let orm = function(connection){
 		FROM property
 		LEFT OUTER JOIN image
 		ON property.id = image.id
-		WHERE property.landlord_id = ${landlord_id}
+		WHERE property.landlord_id = ?
 		;
 		SELECT payment.*
 		FROM property
 		LEFT OUTER JOIN payment 
 		ON property.id = payment.property_id
-		WHERE property.landlord_id = ${landlord_id}
+		WHERE property.landlord_id = ?
 		AND property.tenant_id = payment.tenant_id
 		;
 		SELECT request.*
 		FROM property
 		LEFT OUTER JOIN request
 		ON property.id = request.property_id
-		WHERE property.landlord_id = ${landlord_id}
+		WHERE property.landlord_id = ?
 		AND property.tenant_id = request.logged_by
 		;
 		`;
-		connection.query(query, function(err, res){
+		connection.query(query, landlord_id, function(err, res){
 			cb(res);
 		});
 	}
@@ -134,7 +134,7 @@ let orm = function(connection){
 		connection.query(`REPLACE INTO user SET ?`, user, function(err, res){
 			console.log(err);
 			console.log(res);
-			cb();
+			cb(res);
 		});
 	}
 

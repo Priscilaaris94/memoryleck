@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 // Middleware
 // =============================================================
 app.use(bodyParser.json());
-const parseUrlencoded = bodyParser.urlencoded({extended: false});
+const parseUrlencoded = bodyParser.urlencoded({extended: true});
 
 
 // ORM / DB Connection
@@ -33,7 +33,7 @@ router.route("/property")
    });
 });
 
-// PUT property
+// PUT specific property
 router.route("/property/:id")
 .put(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
@@ -47,7 +47,7 @@ router.route("/property/:id")
 router.route("/property/tenant/:id")
 .get(function(req, res) {  
   orm.getTenantProperties(req.params.id, (data)=>{
-    res.json(data);
+    res.json(...data);
   });
 });
 
@@ -55,7 +55,7 @@ router.route("/property/tenant/:id")
 router.route("/property/landlord/:id")
 .get(function(req, res) { 
   orm.getLandlordProperties(req.params.id, (data)=>{
-    res.json(data);
+    res.json(...data);
   });
 });
 
@@ -93,10 +93,10 @@ router.route("/request/:id")
 // POST a user 
 router.route("/user")
 .post(function(req, res) {
-  if(!req.body.user){return res.send("Bad request")}
-  let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
-  
-  orm.postUser(user, function(){
+  if(!req.body.uid || !req.body.email){return res.send("Bad request")}
+  let redirectto = req.body.type === 'landlord' ? '/landlord-home' : '/tenant-home';
+  // res.send('thanks... I\'ll redirect you to ' + redirectto);
+  orm.postUser({uid: req.body.uid, email: req.body.email, name: req.body.name, type: req.body.type}, function(err, data){
     res.redirect(redirectto);
   });
 });

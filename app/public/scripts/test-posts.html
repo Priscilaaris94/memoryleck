@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h4>Add User</h4>
+<!-- <h4>Add User</h4>
 <form id="form-post-user" action="/api/user" method="post">
     <input type="text" name="name" placeholder="name" value="Garfield">
     <input type="text" name="email" placeholder="email" value="test@one.two">
@@ -22,7 +22,7 @@
 </form>
 <br>
 <hr>
-<br>
+<br> -->
 <h4>Add Property</h4>
 <form id="form-post-property" action="/api/property" method="post">
 	<input type="text" name="address_one" placeholder="address_one" value="321 Test">
@@ -68,36 +68,6 @@
 </form>
 <br>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-$("#form-post-user").on('submit', (event)=>{
-	event.preventDefault();
-	console.log('Form submitted : form-post-user ... ', event);
-	for(let i of event.currentTarget){
-		console.log(i.name + ' ' + i.value);
-	}
-});
-$("#form-post-property").on('submit', (event)=>{
-	event.preventDefault();
-	console.log('Form submitted : form-post-property ... ', event);
-	for(let i of event.currentTarget){
-		console.log(i.name + ' ' + i.value);
-	}
-});
-$("#form-post-payment").on('submit', (event)=>{
-	event.preventDefault();
-	console.log('Form submitted : form-post-payment ... ', event);
-	for(let i of event.currentTarget){
-		console.log(i.name + ' ' + i.value);
-	}
-});
-$("#form-post-request").on('submit', (event)=>{
-	event.preventDefault();
-	console.log('Form submitted : form-post-request ... ', event);
-	for(let i of event.currentTarget){
-		console.log(i.name + ' ' + i.value);
-	}
-});
-
-</script>
+<script src="forms.js"></script>
 </body>
 </html>

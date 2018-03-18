@@ -2,12 +2,11 @@ DROP SCHEMA IF EXISTS my_database;
 CREATE DATABASE IF NOT EXISTS my_database;
 USE my_database;
 CREATE TABLE user (
-	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
     email VARCHAR(255),
-    uid VARCHAR(255),
+    uid VARCHAR(255) NOT NULL,
     type ENUM('landlord', 'tenant') DEFAULT 'tenant',
-	PRIMARY KEY (id),
+	PRIMARY KEY (uid),
     CONSTRAINT user_type UNIQUE(uid, type)
 );
 
@@ -23,11 +22,11 @@ CREATE TABLE property (
 	sqfeet INT,
 	price INT,
 	status VARCHAR(255),
-	landlord_id INT,
-	tenant_id INT,
+	landlord_id VARCHAR(255),
+	tenant_id VARCHAR(255),
 	PRIMARY KEY (id),
-	FOREIGN KEY (landlord_id) REFERENCES user(id),
-	FOREIGN KEY (tenant_id) REFERENCES user(id)
+	FOREIGN KEY (landlord_id) REFERENCES user(uid),
+	FOREIGN KEY (tenant_id) REFERENCES user(uid)
 );
 
 CREATE TABLE request (
@@ -37,11 +36,11 @@ CREATE TABLE request (
 	date_started VARCHAR(255),
 	contact_name VARCHAR(255),
 	contact_phone VARCHAR(255),
-	logged_by INT,
+	logged_by VARCHAR(255),
 	property_id INT,
 	status ENUM('open', 'in progress', 'closed'),
 	PRIMARY KEY (id),
-	FOREIGN KEY (logged_by) REFERENCES user(id),
+	FOREIGN KEY (logged_by) REFERENCES user(uid),
 	FOREIGN KEY (property_id) REFERENCES property(id)
 );
 
@@ -56,12 +55,12 @@ CREATE TABLE image (
 CREATE TABLE payment (
 	id INT NOT NULL AUTO_INCREMENT,
 	date DATE NOT NULL,
-	tenant_id INT,
+	tenant_id VARCHAR(255),
 	property_id INT,
 	amount INT,
 	method VARCHAR(255),
 	PRIMARY KEY (id),
 	FOREIGN KEY (property_id) REFERENCES property(id),
-	FOREIGN KEY (tenant_id) REFERENCES user(id),
+	FOREIGN KEY (tenant_id) REFERENCES user(uid),
     CONSTRAINT single_payment UNIQUE(date, property_id)
 );
