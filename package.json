@@ -20,7 +20,6 @@
   "homepage": "https://github.com/Priscilaaris94/memoryleck#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",

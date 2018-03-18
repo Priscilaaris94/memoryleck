@@ -22,9 +22,9 @@ else {
     host: "localhost",
     port: 3306,
     user: "admin",
-    password: "password1",
-    database: "my_database",
-    multipleStatements: true
+    password: process.env.MYSQL_PASSWORD,
+    multipleStatements: true,
+    database: "my_database"
   });
 
 }
