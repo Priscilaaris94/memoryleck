@@ -61,8 +61,6 @@ let orm = function(connection){
 		FROM property
 		LEFT OUTER JOIN request
 		ON property.id = request.property_id
-		LEFT OUTER JOIN image
-		ON property.id = image.id
 		WHERE property.tenant_id = ?
 		;
 		SELECT payment.*
@@ -97,7 +95,6 @@ let orm = function(connection){
 		LEFT OUTER JOIN request
 		ON property.id = request.property_id
 		WHERE property.landlord_id = ?
-		AND property.tenant_id = request.logged_by
 		;
 		`;
 		connection.query(query, landlord_id, function(err, res){

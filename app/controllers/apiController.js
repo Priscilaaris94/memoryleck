@@ -62,8 +62,8 @@ router.route("/property/landlord/:id")
 // POST payment
 router.route("/payment")
 .post(function(req, res) {
-  if(!req.body.payment){return res.send("Bad request")}
-   orm.postPayment(req.body.payment, function(){
+  if(!req.body.payment){return res.send("Bad request")} 
+  orm.postPayment(JSON.parse(req.body.payment), function(){
     res.redirect('/tenant-home');
    });
 });
@@ -73,7 +73,6 @@ router.route("/request")
 .post(function(req, res) {
   if(!req.body.request){return res.send("Bad request")}
   let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
-  
   orm.postRequest(req.body.request, function(){
     res.redirect(redirectto);
   });
