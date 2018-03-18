@@ -36,7 +36,7 @@ module.exports = function(app) {
   });
 
   // PUT property
-  app.put("/api/property", function(req, res) {
+  app.put("/api/property/:id", function(req, res) {
     if(!req.body.property){return res.send("Bad request")}
      orm.postProperty(req.body.property, function(){
       res.redirect('/landlord-home');
@@ -53,6 +53,16 @@ module.exports = function(app) {
   
   // POST request 
   app.post("/api/request", function(req, res) {
+    if(!req.body.request){return res.send("Bad request")}
+    let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
+    
+    orm.postRequest(req.body.request, function(){
+      res.redirect(redirectto);
+    });
+  });
+
+  // PUT request 
+  app.put("/api/request/:id", function(req, res) {
     if(!req.body.request){return res.send("Bad request")}
     let redirectto = req.body.user.type === 'landlord' ? '/landlord-home' : '/tenant-home';
     

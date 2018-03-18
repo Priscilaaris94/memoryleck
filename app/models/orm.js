@@ -20,15 +20,27 @@ let orm = function(connection){
 	}
 
 	////////////////////////////////////////////////////////////////
+	// Images
+	this.postImage(image, cb){
+		connection.query(`INSERT INTO image SET ?`, image, function(err, res){
+			console.log(err);
+			console.log(res);
+			cb();
+		});
+	}
+
+	////////////////////////////////////////////////////////////////
 	// Property Queries
 
 	this.getVacantProperty(cb){
 		let query = `
-		SELECT * 
+		SELECT property.*, image.src 
 		FROM property 
 		LEFT OUTER JOIN image
-		ON property.id = image.property
-		WHERE status = 'vacant'
+		ON property.id = image.property_id
+		WHERE property.tenant_id IS NULL
+		AND property.status = 'vacant'
+		;
 		`;
 		connection.query(query, function(err, res){
 				console.log(err);
@@ -43,11 +55,16 @@ let orm = function(connection){
 		FROM property
 		LEFT OUTER JOIN request
 		ON property.id = request.property_id
-		LEFT OUTER JOIN payment 
-		ON property.id = payment.property_id
 		LEFT OUTER JOIN image
 		ON property.id = image.id
-		WHERE property.tenant = ${tenant_id}
+		WHERE property.tenant_id = ${tenant_id}
+		;
+		SELECT *
+		FROM property
+		LEFT OUTER JOIN payment 
+		ON property.id = payment.property_id
+		WHERE property.tenant_id = ${tenant_id}
+		;
 		`;
 		connection.query(query, function(err, res){
 			cb(res);
@@ -58,13 +75,24 @@ let orm = function(connection){
 		let query = `
 		SELECT *
 		FROM property
-		LEFT OUTER JOIN request
-		ON property.id = request.property_id
 		LEFT OUTER JOIN payment 
 		ON property.id = payment.property_id
+		WHERE property.landlord_id = ${landlord_id}
+		AND property.tenant_id = payment.tenant_id
+		;
+		SELECT *
+		FROM property
+		LEFT OUTER JOIN request
+		ON property.id = request.property_id
+		WHERE property.landlord_id = ${landlord_id}
+		AND property.tenant_id = request.logged_by
+		;
+		SELECT *
+		FROM property
 		LEFT OUTER JOIN image
 		ON property.id = image.id
-		WHERE property.tenant = ${tenant_id}
+		WHERE property.landlord_id = ${landlord_id}
+		;
 		`;
 		connection.query(query, function(err, res){
 			cb(res);
@@ -81,10 +109,6 @@ let orm = function(connection){
 			cb();
 		});
 	}
-
-	////////////////////////////////////////////////////////////////
-	// Images
-
 
 	////////////////////////////////////////////////////////////////
 	// Payments
