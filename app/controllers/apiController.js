@@ -31,10 +31,7 @@ router.route("/property")
    orm.postProperty(JSON.parse(req.body.property), function(){
     res.redirect('/landlord-home');
    });
-});
-
-// PUT specific property
-router.route("/property/:id")
+})
 .put(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
    orm.postProperty(req.body.property, function(){
