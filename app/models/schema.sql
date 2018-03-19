@@ -21,6 +21,9 @@ CREATE TABLE property (
 	baths INT,
 	sqfeet INT,
 	price INT,
+	img_1 VARCHAR(255),
+	img_2 VARCHAR(255),
+	img_3 VARCHAR(255), 
 	status VARCHAR(255),
 	landlord_id VARCHAR(255),
 	tenant_id VARCHAR(255),
@@ -41,14 +44,6 @@ CREATE TABLE request (
 	status ENUM('open', 'in progress', 'closed'),
 	PRIMARY KEY (id),
 	FOREIGN KEY (logged_by) REFERENCES user(uid),
-	FOREIGN KEY (property_id) REFERENCES property(id)
-);
-
-CREATE TABLE image (
-	id INT NOT NULL AUTO_INCREMENT,
-	src VARCHAR(255),
-	property_id INT,
-	PRIMARY KEY (id),
 	FOREIGN KEY (property_id) REFERENCES property(id)
 );
 

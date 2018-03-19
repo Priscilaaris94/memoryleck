@@ -20,24 +20,12 @@ let orm = function(connection){
 	}
 
 	////////////////////////////////////////////////////////////////
-	// Images
-	this.postImage = function(image, cb){
-		connection.query(`INSERT INTO image SET ?`, image, function(err, res){
-			console.log(err);
-			console.log(res);
-			cb();
-		});
-	}
-
-	////////////////////////////////////////////////////////////////
 	// Property Queries
 
 	this.getVacantProperty = function(cb){
 		let query = `
-		SELECT property.*, image.src 
+		SELECT * 
 		FROM property 
-		LEFT OUTER JOIN image
-		ON property.id = image.property_id
 		WHERE property.tenant_id IS NULL
 		AND property.status = 'vacant'
 		;
@@ -51,10 +39,8 @@ let orm = function(connection){
 
 	this.getTenantProperties = function(tenant_id, cb){
 		let query = `
-		SELECT property.*, image.src
+		SELECT property
 		FROM property
-		LEFT OUTER JOIN image
-		ON property.id = image.id
 		WHERE property.tenant_id = ?
 		;
 		SELECT request.*
@@ -79,8 +65,6 @@ let orm = function(connection){
 		let query = `
 		SELECT *
 		FROM property
-		LEFT OUTER JOIN image
-		ON property.id = image.id
 		WHERE property.landlord_id = ?
 		;
 		SELECT payment.*
