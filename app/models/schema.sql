@@ -40,10 +40,12 @@ CREATE TABLE request (
 	contact_name VARCHAR(255),
 	contact_phone VARCHAR(255),
 	logged_by VARCHAR(255),
+	updated_by VARCHAR(255) NULL,
 	property_id INT,
 	status ENUM('open', 'in progress', 'closed'),
 	PRIMARY KEY (id),
 	FOREIGN KEY (logged_by) REFERENCES user(uid),
+	FOREIGN KEY (updated_by) REFERENCES user(uid),
 	FOREIGN KEY (property_id) REFERENCES property(id)
 );
 

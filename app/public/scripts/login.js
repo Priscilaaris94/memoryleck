@@ -25,7 +25,7 @@ $('#login-tenant').on('click', ()=>{
       localStorage.setItem('type', 'tenant');
       $.post('/api/user', user)
       .then(r => {
-        console.log(r);
+        // console.log(r);
         // window.location.href = r;
       });
     }
@@ -35,6 +35,7 @@ $('#login-tenant').on('click', ()=>{
 $('#login-landlord').on('click', ()=>{
   console.log('clicked');
   firebase.auth().signInWithPopup(provider).then( result => {
+    console.log(result.user);
     if(result.user){
       let user = {
         uid: result.user.uid,
@@ -46,7 +47,7 @@ $('#login-landlord').on('click', ()=>{
       localStorage.setItem('type', 'landlord');
       $.post('/api/user', user)
       .then(r => {
-        console.log(r);
+        // console.log('complete ' + r);
         // window.location.href = r;
       });
     }

@@ -1,11 +1,34 @@
 let orm = function(connection){
+
+	////////////////////////////////////////////////////////////////
+	// Generic insert and updates (in good ORM spirit)
+
+	this.insertDB = function(table, vals, cb){
+		connection.query(`INSERT INTO ${table} SET ?`, vals, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+			});
+	}
+
+	this.updateDB = function(table, vals, key, cb){
+		connection.query(`UPDATE ${table} SET ? WHERE ?`, 
+			[vals, key],
+			function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+			});
+	}
+
 	////////////////////////////////////////////////////////////////
 	// Property Post and update
+
 	this.postProperty = function(property, cb){
 		connection.query(`INSERT INTO property SET ?`, property, function(err, res){
 				console.log(err);
 				console.log(res);
-				cb();
+				cb(res);
 			});
 	}
 
@@ -15,7 +38,7 @@ let orm = function(connection){
 			function(err, res){
 				console.log(err);
 				console.log(res);
-				cb();
+				cb(res);
 			});
 	}
 
@@ -89,11 +112,28 @@ let orm = function(connection){
 
 	////////////////////////////////////////////////////////////////
 	// Maintenance Requests
+	
 	this.postRequest = function(request, cb){
 		connection.query(`REPLACE INTO request SET ?`, request, function(err, res){
 			console.log(err);
 			console.log(res);
-			cb();
+			connection.query(`SELECT type FROM user WHERE uid = ?`, request.updated_by, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+			});
+		});
+	}
+
+	this.putRequest = function(request, cb){
+		connection.query(`REPLACE INTO request SET ? WHERE id = ?`, [request, request.id], function(err, res){
+			console.log(err);
+			console.log(res);
+			connection.query(`SELECT type FROM user WHERE uid = ?`, request.updated_by, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+			});
 		});
 	}
 
@@ -104,7 +144,23 @@ let orm = function(connection){
 		connection.query(`REPLACE INTO payment SET ?`, payment, function(err, res){
 			console.log(err);
 			console.log(res);
-			cb();
+			cb(res);
+		});
+	}
+
+	this.putPayment = function(payment, cb){
+		connection.query(`REPLACE INTO payment SET ? WHERE id = ?`, [payment, payment.id], function(err, res){
+			console.log(err);
+			console.log(res);
+			cb(res);
+		});
+	}
+
+	this.deletePayment = function(paymentid, cb){
+		connection.query(`DELETE FROM payment WHERE id = ?`, paymentid, function(err, res){
+			console.log(err);
+			console.log(res);
+			cb(res);
 		});
 	}
 

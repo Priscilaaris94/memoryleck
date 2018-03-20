@@ -2,33 +2,33 @@
   "name": "memoryleck",
   "version": "1.0.0",
   "description": "property managment website: display and keep track of your porperties",
-  "main": "server.js",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "multer": "^1.3.0",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.4",
+    "nodemon": "^1.17.2"
+  },
   "scripts": {
     "test": "mocha",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Priscilaaris94/memoryleck.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Priscilaaris94/memoryleck/issues"
   },
-  "homepage": "https://github.com/Priscilaaris94/memoryleck#readme",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-
-    "dotenv": "^5.0.1",
-    "express": "^4.16.2",
-    "express-handlebars": "^3.0.0",
-    "mysql": "^2.15.0",
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.5.3"
-}
-
+  "homepage": "https://github.com/Priscilaaris94/memoryleck#readme"
 }
