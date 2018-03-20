@@ -18,7 +18,7 @@ var app = express();
 
 //Serve static content for the app from the "public" directory in the application directory.
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/app/public'));
 
 
 
@@ -47,14 +47,11 @@ app.set("view engine", "handlebars");
 
 
 // Import routes and give the server access to them.
+var api = require('./app/controllers/apiController');
+app.use('/api', api);
 
-var routes = require("./controllers/appController.js");
-
-
-
-app.use(routes);
-
-
+// var routes = require("./app/controllers/appController.js");
+// app.use('/', routes);
 
 //App is listening...
 

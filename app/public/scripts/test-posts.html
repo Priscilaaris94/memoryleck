@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+	body{
+		margin: 2em;
+		padding: 2em;
+	}
+		label, input{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+
+<h4>Add Property</h4>
+<form id="form-post-property" action="/api/property" method="post">
+	<label>address_one</label>
+	<input type="text" name="address_one" placeholder="address_one" value="321 Test">
+	<label>address_two</label>
+	<input type="text" name="address_two" placeholder="address_two" value="">
+	<label>city</label>
+	<input type="text" name="city" placeholder="city" value="Atlanta">
+	<label>state</label>
+	<input type="text" name="state" placeholder="state" value="GA">
+	<label>zip</label>
+	<input type="number" name="zip" placeholder="zip" value="30303">
+	<label>beds</label>
+	<input type="number" name="beds" placeholder="beds" value="2">
+	<label>baths</label>
+	<input type="number" name="baths" placeholder="baths" value="2">
+	<label>sqfeet</label>
+	<input type="number" name="sqfeet" placeholder="sqfeet" value="800">
+	<label>price</label>
+	<input type="number" name="price" placeholder="price" value="800">
+	<label>status</label>
+	<input type="text" name="status" placeholder="status" value="vacant">
+	<label>landlord_id</label>
+	<input type="text" name="landlord_id" placeholder="landlord_id">
+	<label>tenant_id</label>
+	<input type="text" name="tenant_id" placeholder="tenant_id">
+	<code>Valid tenant id: FrvOxTPdylUgBDGEZOiyev458gh1 | valid landlord id: bC8Ol7BDdoY6AZD10w2vRmU0Pab2</code>
+	<code>Try localStorage.setItem('user', '92112AlAiYnQjMa')</code>
+	<input type="submit">
+</form>
+<br>
+<hr>
+<br>
+<h4>Put Property</h4>
+<form id="form-put-property" action="/api/property" method="put">
+	<label>property id</label>
+	<input type="text" name="id" placeholder="property id">
+	<label>address_one</label>
+	<input type="text" name="address_one" placeholder="address_one" value="321 Test">
+	<label>address_two</label>
+	<input type="text" name="address_two" placeholder="address_two" value="">
+	<label>city</label>
+	<input type="text" name="city" placeholder="city" value="Atlanta">
+	<label>state</label>
+	<input type="text" name="state" placeholder="state" value="GA">
+	<label>zip</label>
+	<input type="number" name="zip" placeholder="zip" value="30303">
+	<label>beds</label>
+	<input type="number" name="beds" placeholder="beds" value="2">
+	<label>baths</label>
+	<input type="number" name="baths" placeholder="baths" value="2">
+	<label>sqfeet</label>
+	<input type="number" name="sqfeet" placeholder="sqfeet" value="800">
+	<label>price</label>
+	<input type="number" name="price" placeholder="price" value="800">
+	<label>status</label>
+	<input type="text" name="status" placeholder="status" value="vacant">
+	<label>landlord_id</label>
+	<input type="text" name="landlord_id" placeholder="landlord_id">
+	<label>tenant_id</label>
+	<input type="text" name="tenant_id" placeholder="tenant_id">
+	<code>Valid tenant id: FrvOxTPdylUgBDGEZOiyev458gh1 | valid landlord id: bC8Ol7BDdoY6AZD10w2vRmU0Pab2</code>
+	<code>Try localStorage.setItem('user', '92112AlAiYnQjMa')</code>
+	<input type="submit">
+</form>
+<br>
+<hr>
+<br>
+<h4>Add Payment</h4>
+<form id="form-post-payment" action="/api/payment" method="post">
+	<label>date</label>
+	<input type="date" name="date" placeholder="date" value="2018-01-01">
+	<label>property_id</label>
+	<input type="number" name="property_id" placeholder="property" value="4">
+	<label>amount</label>
+	<input type="number" name="amount" placeholder="amount" value="800">
+	<label>method</label>
+	<input type="text" name="method" placeholder="method" value="Credit Card">
+	<input type="submit">
+</form>
+<br>
+<hr>
+<br>
+<h4>Delete a Payment</h4>
+<form id="form-delete-payment" action="/api/payment" method="post">
+	<label>ID</label>
+	<input type="number" name="id" placeholder="payment id">
+	<input type="submit">
+</form>
+<br>
+<hr>
+<br>
+<h4>Add Request</h4>
+<form id="form-post-request" action="/api/request" method="post">
+	<label>issue_title</label>
+	<input type="text" name="issue_title" placeholder="issue_title" value="Something needs your attention">
+	<label>issue_desc</label>
+	<input type="text" name="issue_desc" placeholder="issue_desc" value="Blah blah blah blah blah blah blah">
+	<label>date_started</label>
+	<input type="date" name="date_started" placeholder="date_started" value="2018-01-01">
+	<label>contact_name</label>
+	<input type="text" name="contact_name" placeholder="contact_name" value="Popeye">
+	<label>contact_phone</label>
+	<input type="number" min="1111111111" max="9999999999" name="contact_phone" placeholder="contact_phone" value="3211234321">
+	<label>property_id</label>
+	<input type="text" name="property_id" placeholder="property" value="10">
+	<label>status</label>
+	<input type="text" name="status" placeholder="status" value="open">
+	<input type="submit">
+</form>
+<br>
+<hr>
+<br>
+<h4>Put Request</h4>
+<form id="form-pus-request" action="/api/request" method="post">
+	<label>id</label>
+	<input type="text" name="id">
+	<label>issue_title</label>
+	<input type="text" name="issue_title" placeholder="issue_title" value="Something needs your attention">
+	<label>issue_desc</label>
+	<input type="text" name="issue_desc" placeholder="issue_desc" value="Blah blah blah blah blah blah blah">
+	<label>date_started</label>
+	<input type="date" name="date_started" placeholder="date_started" value="2018-01-01">
+	<label>contact_name</label>
+	<input type="text" name="contact_name" placeholder="contact_name" value="Popeye">
+	<label>contact_phone</label>
+	<input type="number" min="1111111111" max="9999999999" name="contact_phone" placeholder="contact_phone" value="3211234321">
+	<label>property_id</label>
+	<input type="text" name="property_id" placeholder="property" value="10">
+	<label>status</label>
+	<input type="text" name="status" placeholder="status" value="open">
+	<input type="submit">
+</form>
+<br>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="forms.js"></script>
+</body>
+</html>
