@@ -77,7 +77,6 @@ router.get('/landlord/home/:uid/request/:requestid', function(req, res){
     });
 });
 
-
 router.get('/landlord/home/', function(req, res){
     res.redirect('/landlord/login');
 });
@@ -85,14 +84,30 @@ router.get('/landlord/home/', function(req, res){
 // Tenant Pages
 // =============================================================
 
-/*app.get('/tenant/login', function(req, res){
-    res.render('main/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
+router.get('/tenant/login', function(req, res){
+    res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
 });
 
-app.get('/tenant/home/:id', function(req, res){
-    res.render('pages/home', {title: 'My Tenant Home', property});
+router.get('/tenant/home/:uid', function(req, res){
+    orm.getTenantProperties(req.params.uid, (property)=>{
+        res.render('pages/tenant/tenant',{title: 'My Property', uid: req.params.uid, property});
+    });
 });
 
+router.get('/tenant/home/:uid/newrequest/:propertyid', function(req, res){
+    let request = {
+        property_id: req.params.propertyid
+    };
+    res.render('pages/tenant/request', {title: 'Add a New Request', uid: req.params.uid, request});
+});
+
+router.get('/tenant/home/:uid/request/:requestid', function(req, res){
+    orm.selectDB('request', {id: req.params.requestid}, (data)=>{
+        let request = data[0];
+        res.render('pages/tenant/request',{title: 'Update Request', uid: req.params.uid, request});
+    });
+});
+/*
 app.get('/tenant/home/:id/payment', function(req, res){
     res.render('pages/home', {title: 'My Tenant Home', property});
 });

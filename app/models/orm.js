@@ -114,8 +114,8 @@ let orm = function(connection){
 		connection.query(query, [tenant_id, tenant_id, tenant_id], function(err, res){
 			if(err || !res[0] || !res[0][0]){ return cb('error');}
 			let tenantProperty = res[0][0];
-			tenantProperty.payments = res[1];
-			tenantProperty.requests = res[2];
+			tenantProperty.requests = res[1];
+			tenantProperty.payments = res[2];
 			cb(tenantProperty);
 		});
 	}
