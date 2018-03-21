@@ -107,15 +107,15 @@ router.get('/tenant/home/:uid/request/:requestid', function(req, res){
         res.render('pages/tenant/request',{title: 'Update Request', uid: req.params.uid, request});
     });
 });
-/*
-app.get('/tenant/home/:id/payment', function(req, res){
-    res.render('pages/home', {title: 'My Tenant Home', property});
+
+router.get('/tenant/home/:uid/newpayment/:property_id', function(req, res){
+    let payment = {
+        property_id: req.params.property_id,
+        tenant_id: req.params.uid
+    };
+    res.render('pages/tenant/payment', {title: 'Add a New Payment', uid: req.params.uid, payment});
 });
 
-app.get('/tenant/home/:id/request', function(req, res){
-    res.render('pages/home', {title: 'My Tenant Home', property});
-});
-*/
 
 // Export routes for server.js to use.
 module.exports = router;

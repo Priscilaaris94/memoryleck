@@ -11,9 +11,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<form data-id="<%= request.id %>" data-uid="<%= uid %>" data-property="<%= request.property_id %>" data-user="tenant">
+				<form data-id="<%= payment.id %>" data-uid="<%= uid %>" data-property="<%= payment.property_id %>">
 					
-					<% include ../../partials/request-fields %>
+					<% include ../../partials/payment-fields %>
 
 					<button class="btn" type="submit"><%= title %></button>
 					<a href="/tenant/home/<%= uid %>">Cancel</a>
@@ -21,6 +21,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/scripts/request.js"></script>
+	<script src="/scripts/payment.js"></script>
 </body>
 </html>
