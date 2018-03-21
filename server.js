@@ -62,10 +62,39 @@ app.get('/', function(req, res){
 	}];
 	// orm.getproperties( ... callback() );
 	// fetch('/api/property').then(b => b.json()).then( d => console.log(d) )
- 	res.render('pages/allproperties',{title: 'All Properties',properties: properties});
+ 	res.render('pages/allproperties',{title: 'All Properties', properties});
 });
 
 
+app.get('/property/:id', function(req, res){
+	// orm.getproperty( ... callback() );
+	// fetch('/api/property').then(b => b.json()).then( d => console.log(d) )
+ 	let property = 	{
+		address_one: "567 Peachtree Road",
+		address_two: null,
+		baths: 1,
+		beds: 2,
+		city: "Atlanta",
+		id: 2,
+		img_1: "https://lorempixel.com/g/400/400/cats",
+		landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
+		price: 1150,
+		sqfeet: 920,
+		state: "GA",
+		status: "vacant",
+		tenant_id: null,
+		zip: 30302
+	};
+ 	res.render('pages/singleproperty',{title: 'Property ' + property.address_one, property});
+});
+
+app.get('/landlord/login', function(req, res){
+ 	res.render('pages/login', {title: 'Landlord Login', buttonid: 'login-landlord'});
+});
+
+app.get('/tenant/login', function(req, res){
+ 	res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
+});
 
 
 // Import routes and give the server access to them.

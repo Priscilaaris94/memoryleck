@@ -2,29 +2,14 @@
 <head>
 	<title><%= title %></title>
 	<% include ../partials/head %>
-	<link href="carousel.css" rel="stylesheet">
 </head>
 <body>
 	<% include ../partials/nav %>
-	<div class="container">
-		<div class ="row">
-			<div class="col-12">
-				<h1>Find Your Next Rental</h1>
-				<br >
-				<form class="form-inline mt-2 mt-md-0">
-					<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-			</div>
-		</div>
-		<br >
 		<div class="row">
 			<div class="col-12">
 				<hr class="featurette-divider" />
-				<% properties.forEach(function(property){ %>
 				<div class="row featurette">
 					<div class="col-md-7">
-						<a href="/property/<%= property.id %>">
 						<h2 class="featurette-heading">
 							<%= property.address_one %> <br>
 							<%= property.address_two %>
@@ -36,14 +21,12 @@
 							SqFeet: <%= property.sqfeet %>
 							Monthly Rent: <%= property.price %>
 						</p>
-						</a>
 					</div>
 					<div class="col-md-5">
 						<img class="featurette-image img-fluid mx-auto" src="<%= property.img_1 %>" alt="Generic placeholder image" />
 					</div>
 				</div>
 				<hr class="featurette-divider" />
-				<% })%>
 			</div>
 		</div>
 	</div>
