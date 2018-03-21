@@ -16,7 +16,6 @@
 				<% properties.forEach(function(property){ %>
 				<div class="row featurette">
 					<div class="col-md-7">
-						<a href="/landlord/home/<%= uid %>/property/<%= property.id %>">
 							<h2 class="featurette-heading">
 								<%= property.address_one %> <br>
 								<%= property.address_two %>
@@ -29,31 +28,34 @@
 								SqFeet: <%= property.sqfeet %>
 								Monthly Rent: <%= property.price %>
 							</p>
-						</a>
+						<a class="btn btn-secondary" href="/landlord/home/<%= uid %>/property/<%= property.id %>">Edit</a>
+						<a class="btn btn-secondary" href="/landlord/home/<%= uid %>/newrequest/<%= property.id %>">New Request</a>
 					</div>
 					<div class="col-md-5">
 						<div class="maintenance-requests">
-							<table>
+							<table class="table">
 								<tr>
 									<th>Status</th>
 									<th>Request</th>
 								</tr>	
 								<% property.requests.forEach(function(request){ %>
-								<a href="/landlord/home/<%= property.landlord_id %>/request/<%= request.id %>">
-									<tr>
-										<td>
+								<tr>
+									<td>
+										<a href="/landlord/home/<%= property.landlord_id %>/request/<%= request.id %>">
 											<%= request.status %>
-										</td>
-										<td>
+										</a>
+									</td>
+									<td>
+										<a href="/landlord/home/<%= property.landlord_id %>/request/<%= request.id %>">
 											<%= request.date_started %> : <%= request.issue_title %>
-										</td>
-									</tr>
-								</a>
+										</a>
+									</td>
+								</tr>
 								<% })%>
 							</table>
 						</div>
 						<div class="payments">
-							<table>
+							<table class="table">
 								<tr>
 									<th>Date</th>
 									<th>Amount</th>
@@ -62,7 +64,7 @@
 								<% property.payments.forEach(function(payment){ %>
 								<tr>
 									<td>
-										<%= payment.date %>
+										<%= (payment.date).toDateString() %>
 									</td>
 									<td>
 										<%= payment.amount %>
