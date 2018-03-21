@@ -28,15 +28,8 @@ router.route("/property")
 })
 .post(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
-   orm.postProperty(JSON.parse(req.body.property), function(){
-    res.redirect('/landlord-home/');
-   });
-})
-.put(function(req, res) {
-  if(!req.body.property){return res.send("Bad request")}
-   orm.postProperty(req.body.property, function(){
-    // res.redirect('/landlord-home');
-    res.send('got it');
+   orm.upsertDB('property', JSON.parse(req.body.property), function(){
+    res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
    });
 });
 
@@ -55,22 +48,8 @@ router.route("/property/landlord/:id")
   orm.getLandlordProperties(req.params.id, (data)=>{
     res.json(data);
   });
-})
-.post(function(req, res) {
-  if(!req.body.property){return res.send("Bad request")}
-   orm.postProperty(JSON.parse(req.body.property), function(){
-    res.redirect('/landlord/home/' + req.params.id);
-   });
 });
 
-router.route("/property/landlord/:id/:propid")
-.put(function(req, res) {
-  if(!req.body.property){return res.send("Bad request")}
-   orm.postProperty(req.body.property, function(){
-    // res.redirect('/landlord-home');
-    res.send('got it');
-   });
-});
 
 // Payment
 // =============================================================
@@ -78,20 +57,15 @@ router.route("/property/landlord/:id/:propid")
 router.route("/payment")
 .post(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
-  orm.postPayment(JSON.parse(req.body.payment), function(){
-    res.redirect('/tenant/home');
-   });
-})
-.put(function(req, res) {
-  if(!req.body.payment){return res.send("Bad request")} 
-  orm.putPayment(JSON.parse(req.body.payment), function(){
-    res.redirect('/tenant/home');
+  console.log(JSON.parse(req.body.payment));
+  orm.upsertDB('payment', JSON.parse(req.body.payment), function(){
+    res.send('success');
    });
 })
 .delete(function(req, res) {
   if(!req.body.id){return res.send("Bad request")} 
-  orm.deletePayment(req.body.id, function(){
-    res.redirect('/tenant/home');
+  orm.deleteDB('payment', req.body.id, function(){
+    res.send('success');
    });
 });
 
@@ -101,16 +75,8 @@ router.route("/payment")
 router.route("/request")
 .post(function(req, res) {
   if(!req.body.request){return res.send("Bad request")}
-  orm.postRequest(JSON.parse(req.body.request), function(data){
-    let redirectto = data[0].type == 'landlord' ? '/landlord-home' : '/tenant-home';
-    res.redirect(redirectto);
-  });
-})
-.put(function(req, res) {
-  if(!req.body.request){return res.send("Bad request")}
-  orm.putRequest(req.body.request,  function(data){
-    let redirectto = data[0].type == 'landlord' ? '/landlord-home' : '/tenant-home';
-    res.redirect(redirectto);
+  orm.upsertDB('request', JSON.parse(req.body.request), function(data){
+    res.send('success');
   });
 });
 
@@ -122,7 +88,7 @@ router.route("/user")
   if(!req.body.uid || !req.body.email){return res.send("Bad request")}
   let redirectto = req.body.type === 'landlord' ? `/landlord/home/${req.body.uid}` : `/tenant/home/${req.body.uid}`;
   console.log(req.body);
-  orm.postUser({
+  orm.upsertDB('user', {
     uid: req.body.uid,
     email: req.body.email,
     name: req.body.name, 

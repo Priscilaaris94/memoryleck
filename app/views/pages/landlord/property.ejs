@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<form data-id="<%= property.id %>">
+				<form class="form" data-id="<%= property.id %>" data-uid="<%= uid %>">
 
 					<% include ../../partials/property-fields %>
 
@@ -21,5 +21,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="/scripts/property.js"></script>
 </body>
 </html>

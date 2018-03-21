@@ -1,41 +1,67 @@
-<label>address_one</label>
-<input type="text" name="address_one" placeholder="address_one" value="<%= property.address_one %>">
-
-<label>address_two</label>
-<input type="text" name="address_two" placeholder="address_two" value="<%= property.address_two %>">
-
-<label>city</label>
-<input type="text" name="city" placeholder="city" value="<%= property.city %>">
-<label>state</label>
-<input type="text" name="state" placeholder="state" value="<%= property.state %>">
-
-<label>zip</label>
-<input type="number" name="zip" placeholder="zip" value="<%= property.zip %>">
-
-<label>beds</label>
-<input type="number" name="beds" placeholder="beds" value="<%= property.beds %>">
-
-<label>baths</label>
-<input type="number" name="baths" placeholder="baths" value="<%= property.baths %>">
-
-<label>sqfeet</label>
-<input type="number" name="sqfeet" placeholder="sqfeet" value="<%= property.sqfeet %>">
-
-<label>Price</label>
-<input type="number" name="price" placeholder="price" value="<%= property.price %>">
-
-<label>Image</label>
-<input type="file" name="img_1" value="<%= property.img_1 %>">
-
-<label>Status</label>
-<select name="status">
-	<option value="vacant" <% if (property.status == 'vacant') {%>selected<%} %>>vacant</option>
-	<option value="occupied" <% if (property.status == 'occupied') {%>selected<%} %>>occupied</option>
-</select>
-
-<label>Tenant</label>
-<select name="tenant_id">
-	<% tenants.forEach(function(tenant){ %>
-	<option value="<%= tenant.uid %>"><%= tenant.name %> - <%= tenant.email %></option>
-	<% }); %>
-</select>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label for="address_one">address_one</label>
+		<input type="text" name="address_one" id="address_one" placeholder="address_one" value="<%= property.address_one %>">
+	</div>
+	<div class="form-group col-md-6">
+		<label>address_two</label>
+		<input type="text" name="address_two" placeholder="address_two" value="<%= property.address_two %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>city</label>
+		<input type="text" name="city" placeholder="city" value="<%= property.city %>">
+	</div>
+	<div class="form-group col-md-3">
+		<label>state</label>
+		<input type="text" name="state" placeholder="state" value="<%= property.state %>">
+	</div>
+	<div class="form-group col-md-3">
+		<label>zip</label>
+		<input type="number" name="zip" placeholder="zip" value="<%= property.zip %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>beds</label>
+		<input type="number" name="beds" placeholder="beds" value="<%= property.beds %>">
+	</div>
+	<div class="form-group col-md-6">
+		<label>baths</label>
+		<input type="number" name="baths" placeholder="baths" value="<%= property.baths %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>sqfeet</label>
+		<input type="number" name="sqfeet" placeholder="sqfeet" value="<%= property.sqfeet %>">
+	</div>
+	<div class="form-group col-md-6">
+		<label>Price</label>
+		<input type="number" name="price" placeholder="price" value="<%= property.price %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-12">
+		<label>Image</label>
+		<input type="file" name="img_1" value="<%= property.img_1 %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Status</label>
+		<select name="status">
+			<option value="vacant" <% if (property.status == 'vacant') {%>selected<%} %>>vacant</option>
+			<option value="occupied" <% if (property.status == 'occupied') {%>selected<%} %>>occupied</option>
+		</select>
+	</div>
+	<div class="form-group col-md-6" id="tenant-picker">
+		<label>Tenant</label>
+		<select name="tenant_id">
+			<% tenants.forEach(function(tenant){ %>
+			<option value="<%= tenant.uid %>"><%= tenant.name %> - <%= tenant.email %></option>
+			<% }); %>
+		</select>
+	</div>
+</div>

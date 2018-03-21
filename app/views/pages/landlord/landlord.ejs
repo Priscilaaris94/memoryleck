@@ -34,14 +34,14 @@
 					<div class="col-md-5">
 						<ul class="nav nav-tabs" id="dashTabs" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" id="request-tab" data-toggle="tab" href="#request" role="tab" aria-controls="request" aria-selected="true">Maintenance Requests</a>
+								<a class="nav-link active" id="request-tab-<%= property.id %>" data-toggle="tab" href="#request-<%= property.id %>" role="tab" aria-controls="request" aria-selected="true">Maintenance Requests</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
+								<a class="nav-link" id="payment-tab-<%= property.id %>" data-toggle="tab" href="#payment-<%= property.id %>" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
 							</li>
 						</ul>
 						<div class="tab-content" id="dashTabContent">
-							<div class="tab-pane fade show active" id="request" role="tabpanel" aria-labelledby="request-tab">
+							<div class="tab-pane fade show active" id="request-<%= property.id %>" role="tabpanel" aria-labelledby="request-tab-<%= property.id %>">
 								<table class="table">
 									<tr>
 										<th>Status</th>
@@ -63,7 +63,7 @@
 									<% })%>
 								</table>
 							</div>
-							<div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+							<div class="tab-pane fade" id="payment-<%= property.id %>" role="tabpanel" aria-labelledby="payment-tab-<%= property.id %>">
 								<table class="table">
 									<tr>
 										<th>Date</th>

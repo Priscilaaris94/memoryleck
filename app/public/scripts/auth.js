@@ -1,4 +1,5 @@
 (function(){
+/////////////////////////////////////////////////
 // Initialize Firebase
 const config = {
   apiKey: "AIzaSyDaWHQlPSV8YFpjzKj7ovlyqDB3v7u4d_4",
@@ -12,6 +13,7 @@ firebase.initializeApp(config);
 const provider = new firebase.auth.GoogleAuthProvider();
 
 $(document).ready(function(){
+  /////////////////////////////////////////////////
   // Tenant Login
   $('#login-tenant').on('click', ()=>{
     firebase.auth().signInWithPopup(provider).then( result => {
@@ -31,7 +33,7 @@ $(document).ready(function(){
     });
   });
 
-
+  /////////////////////////////////////////////////
   // Landlord Login
   $('#login-landlord').on('click', ()=>{
     firebase.auth().signInWithPopup(provider).then( result => {
@@ -50,7 +52,8 @@ $(document).ready(function(){
       }
     });
   });
-
+  
+  /////////////////////////////////////////////////
   // User Logout
   $('#logout').on('click', ()=>{
     firebase.auth().signOut().then(() => {
