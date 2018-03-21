@@ -22,7 +22,6 @@ const orm = new ORM(connection);
 
 router.route("/property")
 .get(function(req, res) {
-  console.log('getting api/property');
   orm.getVacantProperty((data)=>{
     res.json(data);
   })
@@ -30,7 +29,7 @@ router.route("/property")
 .post(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
    orm.postProperty(JSON.parse(req.body.property), function(){
-    res.redirect('/landlord-home');
+    res.redirect('/landlord-home/');
    });
 })
 .put(function(req, res) {
@@ -47,15 +46,30 @@ router.route("/property")
 router.route("/property/tenant/:id")
 .get(function(req, res) {  
   orm.getTenantProperties(req.params.id, (data)=>{
-    res.json(...data);
+    res.json(data);
   });
 });
 
 router.route("/property/landlord/:id")
 .get(function(req, res) { 
   orm.getLandlordProperties(req.params.id, (data)=>{
-    res.json(...data);
+    res.json(data);
   });
+})
+.post(function(req, res) {
+  if(!req.body.property){return res.send("Bad request")}
+   orm.postProperty(JSON.parse(req.body.property), function(){
+    res.redirect('/landlord/home/' + req.params.id);
+   });
+});
+
+router.route("/property/landlord/:id/:propid")
+.put(function(req, res) {
+  if(!req.body.property){return res.send("Bad request")}
+   orm.postProperty(req.body.property, function(){
+    // res.redirect('/landlord-home');
+    res.send('got it');
+   });
 });
 
 // Payment
@@ -65,19 +79,19 @@ router.route("/payment")
 .post(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
   orm.postPayment(JSON.parse(req.body.payment), function(){
-    res.redirect('/tenant-home');
+    res.redirect('/tenant/home');
    });
 })
 .put(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
   orm.putPayment(JSON.parse(req.body.payment), function(){
-    res.redirect('/tenant-home');
+    res.redirect('/tenant/home');
    });
 })
 .delete(function(req, res) {
   if(!req.body.id){return res.send("Bad request")} 
   orm.deletePayment(req.body.id, function(){
-    res.redirect('/tenant-home');
+    res.redirect('/tenant/home');
    });
 });
 

@@ -1,7 +1,15 @@
 let orm = function(connection){
 
 	////////////////////////////////////////////////////////////////
-	// Generic insert and updates (in good ORM spirit)
+	// Generic CRUD
+
+	this.selectDB = function(table, vals, cb){
+		connection.query(`SELECT * FROM ${table} WHERE ?`, vals, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+			});
+	}
 
 	this.insertDB = function(table, vals, cb){
 		connection.query(`INSERT INTO ${table} SET ?`, vals, function(err, res){
@@ -60,27 +68,55 @@ let orm = function(connection){
 		});
 	}
 
-	this.getTenantProperties = function(tenant_id, cb){
+	this.getPropertyID = function(property_id, cb){
 		let query = `
-		SELECT property
-		FROM property
-		WHERE property.tenant_id = ?
-		;
-		SELECT request.*
-		FROM property
-		LEFT OUTER JOIN request
-		ON property.id = request.property_id
-		WHERE property.tenant_id = ?
-		;
-		SELECT payment.*
-		FROM property
-		LEFT OUTER JOIN payment 
-		ON property.id = payment.property_id
-		WHERE property.tenant_id = ?
+		SELECT * 
+		FROM property 
+		WHERE property.id = ?
 		;
 		`;
-		connection.query(query, tenant_id, function(err, res){
-			cb(res);
+		connection.query(query, property_id, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+		});
+	}
+
+	this.getTenantProperties = function(tenant_id, cb){
+		let query = `
+		SELECT *
+		FROM property
+		WHERE property.tenant_id = ?
+		ORDER BY id DESC
+		LIMIT 1
+		;
+		SELECT request.*
+		FROM request
+		WHERE property_id =
+		(SELECT id
+				FROM property
+				WHERE property.tenant_id = ?
+				ORDER BY id DESC
+		        LIMIT 1
+		)
+		;
+		SELECT payment.*
+		FROM payment
+		WHERE property_id =
+		(SELECT id
+				FROM property
+				WHERE property.tenant_id = ?
+				ORDER BY id DESC
+		        LIMIT 1
+		)
+		;
+		`;
+		connection.query(query, [tenant_id, tenant_id, tenant_id], function(err, res){
+			if(err || !res[0] || !res[0][0]){ return cb('error');}
+			let tenantProperty = res[0][0];
+			tenantProperty.requests = res[1];
+			tenantProperty.payments = res[2];
+			cb(tenantProperty);
 		});
 	}
 
@@ -104,8 +140,14 @@ let orm = function(connection){
 		WHERE property.landlord_id = ?
 		;
 		`;
-		connection.query(query, landlord_id, function(err, res){
-			cb(res);
+		connection.query(query, [landlord_id, landlord_id, landlord_id], function(err, res){
+			if(err || !res[0] || !res[0][0]){ return cb('error');}
+			let landlordProperties = res[0];
+			for(let property of landlordProperties){
+				property.payments = res[1].filter(payment => payment.property_id == property.id);
+				property.requests = res[2].filter(request => request.property_id == property.id);
+			}
+			cb(landlordProperties);
 		});
 	}
 	

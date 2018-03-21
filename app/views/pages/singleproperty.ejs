@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../partials/head %>
+</head>
+<body>
+	<% include ../partials/nav %>
+		<div class="row">
+			<div class="col-12">
+				<hr class="featurette-divider" />
+				<div class="row featurette">
+					<div class="col-md-7">
+						<h2 class="featurette-heading">
+							<%= property.address_one %> <br>
+							<%= property.address_two %>
+							<span class="text-muted"><%= property.city %>, <%= property.state %> <%= property.zip %></span>
+						</h2>
+						<p class="lead">
+							Beds: <%= property.beds %>
+							Baths: <%= property.baths %>
+							SqFeet: <%= property.sqfeet %>
+							Monthly Rent: <%= property.price %>
+						</p>
+					</div>
+					<div class="col-md-5">
+						<img class="featurette-image img-fluid mx-auto" src="<%= property.img_1 %>" alt="Generic placeholder image" />
+					</div>
+				</div>
+				<hr class="featurette-divider" />
+			</div>
+		</div>
+	</div>
+	<% include ../partials/footer %>
+</body>
+</html>
