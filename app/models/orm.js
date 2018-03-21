@@ -210,7 +210,13 @@ let orm = function(connection){
 	// Users
 	
 	this.postUser = function(user, cb){
-		connection.query(`REPLACE INTO user SET ?`, user, function(err, res){
+		let query = `
+		INSERT INTO user 
+		SET ?
+		ON DUPLICATE KEY UPDATE ?
+		`;
+		let dedupe = {name: user.name, email: user.email, type: user.type};
+		connection.query(query, [user, dedupe], function(err, res){
 			console.log(err);
 			console.log(res);
 			cb(res);

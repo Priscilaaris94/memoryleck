@@ -120,10 +120,15 @@ router.route("/request")
 router.route("/user")
 .post(function(req, res) {
   if(!req.body.uid || !req.body.email){return res.send("Bad request")}
-  let redirectto = req.body.type === 'landlord' ? '/landlord-home' : '/tenant-home';
-  // res.send('thanks... I\'ll redirect you to ' + redirectto);
-  orm.postUser({uid: req.body.uid, email: req.body.email, name: req.body.name, type: req.body.type}, function(err, data){
-    res.redirect(redirectto);
+  let redirectto = req.body.type === 'landlord' ? `/landlord/home/${req.body.uid}` : `/tenant/home/${req.body.uid}`;
+  console.log(req.body);
+  orm.postUser({
+    uid: req.body.uid,
+    email: req.body.email,
+    name: req.body.name, 
+    type: req.body.type
+  }, function(err, data){
+    res.send(redirectto);
   });
 });
 
