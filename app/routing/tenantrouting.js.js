@@ -41,19 +41,19 @@ module.exports = function (app) {
 
     // GET request that displays main req.
 
-    app.get("/dash", function (req, res) {
+    app.get("/addreq", function (req, res) {
 
         res.sendFile(path.join(__dirname, "../routing/tenant/addedmainreq.html"));
     });
 
     // GET request that displays main req.
 
-    app.get("/dash", function (req, res) {
+    app.get("/addpay", function (req, res) {
 
         res.sendFile(path.join(_dirname, "../routing/tenant/addedpayment.html"));
     });
 
-    
+
     // If no matching route is found default to home page.
 
     app.get("/", function (req, res) {
