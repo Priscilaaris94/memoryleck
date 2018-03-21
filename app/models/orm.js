@@ -90,13 +90,10 @@ let orm = function(connection){
 		;
 		`;
 		connection.query(query, [tenant_id, tenant_id, tenant_id], function(err, res){
-			// console.log(res[0]);
-			// console.log(res[1]);
-			console.log(res[2][1]['property_id']);
-			// console.log(err);
+			if(err || !res[0] || !res[0][0]){ return cb('error');}
 			let tenantProperty = res[0][0];
-			tenantProperty.requests = res[1];
-			tenantProperty.payments = res[2];
+			tenantProperty.payments = res[1];
+			tenantProperty.requests = res[2];
 			cb(tenantProperty);
 		});
 	}
@@ -121,8 +118,14 @@ let orm = function(connection){
 		WHERE property.landlord_id = ?
 		;
 		`;
-		connection.query(query, landlord_id, function(err, res){
-			cb(res);
+		connection.query(query, [landlord_id, landlord_id, landlord_id], function(err, res){
+			if(err || !res[0] || !res[0][0]){ return cb('error');}
+			let landlordProperties = res[0];
+			for(let property of landlordProperties){
+				property.payments = res[1].filter(payment => payment.property_id == property.id);
+				property.requests = res[2].filter(request => request.property_id == property.id);
+			}
+			cb(landlordProperties);
 		});
 	}
 	

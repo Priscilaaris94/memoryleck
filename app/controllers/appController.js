@@ -13,7 +13,7 @@ const parseUrlencoded = bodyParser.urlencoded({extended: false});
 app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'ejs');
 
-// Middleware
+// Main Pages
 // =============================================================
 
 app.get('/', function(req, res){ 
@@ -77,6 +77,10 @@ app.get('/property/:id', function(req, res){
     res.render('pages/singleproperty',{title: 'Property ' + property.address_one, property});
 });
 
+
+// Landlord Pages
+// =============================================================
+
 app.get('/landlord/login', function(req, res){
     res.render('pages/login', {title: 'Landlord Login', buttonid: 'login-landlord'});
 });
@@ -85,17 +89,34 @@ app.get('/landlord/home/:id', function(req, res){
     res.render('pages/home', {title: 'My Properties', properties});
 });
 
-
-app.get('/landlord/home/:id', function(req, res){
+app.get('/landlord/home/:id/property', function(req, res){
     res.render('pages/home', {title: 'My Properties', properties});
 });
 
+app.get('/landlord/home/:id/payment', function(req, res){
+    res.render('pages/home', {title: 'My Properties', properties});
+});
+
+app.get('/landlord/home/:id/request', function(req, res){
+    res.render('pages/home', {title: 'My Properties', properties});
+});
+
+// Tenant Pages
+// =============================================================
 
 app.get('/tenant/login', function(req, res){
     res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
 });
 
 app.get('/tenant/home/:id', function(req, res){
+    res.render('pages/home', {title: 'My Tenant Home', property});
+});
+
+app.get('/tenant/home/:id/payment', function(req, res){
+    res.render('pages/home', {title: 'My Tenant Home', property});
+});
+
+app.get('/tenant/home/:id/request', function(req, res){
     res.render('pages/home', {title: 'My Tenant Home', property});
 });
 

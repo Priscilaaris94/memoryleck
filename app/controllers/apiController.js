@@ -54,15 +54,25 @@ router.route("/property/tenant/:id")
 router.route("/property/landlord/:id")
 .get(function(req, res) { 
   orm.getLandlordProperties(req.params.id, (data)=>{
-    res.json(...data);
+    res.json(data);
   });
 })
 .post(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
    orm.postProperty(JSON.parse(req.body.property), function(){
-    res.redirect('/landlord-home/' + req.params.id);
+    res.redirect('/landlord/home/' + req.params.id);
    });
 });
+
+router.route("/property/landlord/:id/:propid")
+.put(function(req, res) {
+  if(!req.body.property){return res.send("Bad request")}
+   orm.postProperty(req.body.property, function(){
+    // res.redirect('/landlord-home');
+    res.send('got it');
+   });
+});
+
 // Payment
 // =============================================================
 
