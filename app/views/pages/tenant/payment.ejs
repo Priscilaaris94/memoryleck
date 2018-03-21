@@ -4,19 +4,19 @@
 	<% include ../../partials/head %>
 </head>
 <body>
-	<% include landlord-nav %>
+	<% include tenant-nav %>
 	<div class="jumbotron">
 		<h1><%= title %></h1>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<form data-id="<%= request.id %>" data-uid="<%= uid %>" data-property="<%= request.property_id %>">
-
-					<% include ../../partials/request-fields %>
+				<form data-id="<%= payment.id %>" data-uid="<%= uid %>" data-property="<%= payment.property_id %>">
+					
+					<% include ../../partials/payment-fields %>
 
 					<button class="btn" type="submit"><%= title %></button>
-					<a href="/landlord/home/<%= uid %>">Cancel</a>
+					<a href="/tenant/home/<%= uid %>">Cancel</a>
 				</form>
 			</div>
 		</div>
