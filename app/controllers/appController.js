@@ -1,82 +1,104 @@
 // require express
+const express = require('express');
+const app = express();
+const router = express.Router();
+const bodyParser = require('body-parser');
+var path = require('path');
 
-var express = require("express");
+// Middleware
+// =============================================================
+app.use(bodyParser.json());
+const parseUrlencoded = bodyParser.urlencoded({extended: false});
+ 
+app.set('views', path.join(__dirname, 'app', 'views'));
+app.set('view engine', 'ejs');
 
-var router = express.Router();
+// Middleware
+// =============================================================
 
-// Import the models to it's database function.
-
-var images = require ("../models/images.js");
-var index = require("../models/index.js");
-var payment = require("../models/payment.js");
-var property = require("../models/property.js");
-var request = require("../models/request.js");
-var users = require("../models/users.js");
-
-// create all our routes and set up logic with those routes where required.
-//  GET route to get ... from database.
-
-router.get("/", function(req, res) {
-
-    index.all(function(data) {
-
-        var Object = {
-
-            Property: data
-        };
-
-        console.log(Object);
-        res.render("index", Object);
-
-    });
-
+app.get('/', function(req, res){ 
+    properties = [{
+        address_one: "118 Peachtree Street",
+        address_two: null,
+        baths: 1,
+        beds: 2,
+        city: "Atlanta",
+        id: 2,
+        img_1: "https://lorempixel.com/g/400/400/cats",
+        landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
+        price: 1200,
+        sqfeet: 860,
+        state: "GA",
+        status: "vacant",
+        tenant_id: null,
+        zip: 30302
+    }, 
+    {
+        address_one: "567 Peachtree Road",
+        address_two: null,
+        baths: 1,
+        beds: 2,
+        city: "Atlanta",
+        id: 2,
+        img_1: "https://lorempixel.com/g/400/400/cats",
+        landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
+        price: 1150,
+        sqfeet: 920,
+        state: "GA",
+        status: "vacant",
+        tenant_id: null,
+        zip: 30302
+    }];
+    // orm.getproperties( ... callback() );
+    // fetch('/api/property').then(b => b.json()).then( d => console.log(d) )
+    res.render('pages/allproperties',{title: 'All Properties', properties});
 });
 
-// POST route to create/add a property.
-router.post("/api/properties", function(req, res) {
 
-    property.create([
-
-        "porperty_name", "input"
-    ], [
-       
-        req.body.property_name, req.body.input
-   
-    ], function(result) {
-
-        // send back the ID of the new quote
-
-        res.json({ id: result.insertId });
-    });
-
+app.get('/property/:id', function(req, res){
+    // orm.getproperty( ... callback() );
+    // fetch('/api/property').then(b => b.json()).then( d => console.log(d) )
+    let property =  {
+        address_one: "567 Peachtree Road",
+        address_two: null,
+        baths: 1,
+        beds: 2,
+        city: "Atlanta",
+        id: 2,
+        img_1: "https://lorempixel.com/g/400/400/cats",
+        landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
+        price: 1150,
+        sqfeet: 920,
+        state: "GA",
+        status: "vacant",
+        tenant_id: null,
+        zip: 30302
+    };
+    res.render('pages/singleproperty',{title: 'Property ' + property.address_one, property});
 });
 
-// PUT route to update property input state.
-
-router.put("/api/properties/:id", function(req, res) {
-
-    var condition ="id = " + req.params.id;
-
-    console.log("condition", condition);
-
-    property.update({
-
-        input: req.body.input
-
-    }, condition, function(result) {
-        if (result.changeRows == 0) {
-
-            // If no rows were changed, then the ID must not exist, so 404
-
-            return res.status(404).end();
-        } else {
-            
-            res.status(200).end();
-
-        }
-    });
-
+app.get('/landlord/login', function(req, res){
+    res.render('pages/login', {title: 'Landlord Login', buttonid: 'login-landlord'});
 });
+
+app.get('/landlord/home/:id', function(req, res){
+    res.render('pages/home', {title: 'My Properties', properties});
+});
+
+
+app.get('/landlord/home/:id', function(req, res){
+    res.render('pages/home', {title: 'My Properties', properties});
+});
+
+
+app.get('/tenant/login', function(req, res){
+    res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
+});
+
+app.get('/tenant/home/:id', function(req, res){
+    res.render('pages/home', {title: 'My Tenant Home', property});
+});
+
 
 // Export routes for server.js to use.
 module.exports = router;

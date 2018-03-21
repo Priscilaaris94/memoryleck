@@ -30,7 +30,7 @@ router.route("/property")
 .post(function(req, res) {
   if(!req.body.property){return res.send("Bad request")}
    orm.postProperty(JSON.parse(req.body.property), function(){
-    res.redirect('/landlord-home');
+    res.redirect('/landlord-home/');
    });
 })
 .put(function(req, res) {
@@ -47,7 +47,7 @@ router.route("/property")
 router.route("/property/tenant/:id")
 .get(function(req, res) {  
   orm.getTenantProperties(req.params.id, (data)=>{
-    res.json(...data);
+    res.json(data);
   });
 });
 
@@ -56,8 +56,13 @@ router.route("/property/landlord/:id")
   orm.getLandlordProperties(req.params.id, (data)=>{
     res.json(...data);
   });
+})
+.post(function(req, res) {
+  if(!req.body.property){return res.send("Bad request")}
+   orm.postProperty(JSON.parse(req.body.property), function(){
+    res.redirect('/landlord-home/' + req.params.id);
+   });
 });
-
 // Payment
 // =============================================================
 

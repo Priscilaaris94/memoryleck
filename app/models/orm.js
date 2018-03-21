@@ -62,25 +62,42 @@ let orm = function(connection){
 
 	this.getTenantProperties = function(tenant_id, cb){
 		let query = `
-		SELECT property
+		SELECT *
 		FROM property
 		WHERE property.tenant_id = ?
+		ORDER BY id DESC
+		LIMIT 1
 		;
 		SELECT request.*
-		FROM property
-		LEFT OUTER JOIN request
-		ON property.id = request.property_id
-		WHERE property.tenant_id = ?
+		FROM request
+		WHERE property_id =
+		(SELECT id
+				FROM property
+				WHERE property.tenant_id = ?
+				ORDER BY id DESC
+		        LIMIT 1
+		)
 		;
 		SELECT payment.*
-		FROM property
-		LEFT OUTER JOIN payment 
-		ON property.id = payment.property_id
-		WHERE property.tenant_id = ?
+		FROM payment
+		WHERE property_id =
+		(SELECT id
+				FROM property
+				WHERE property.tenant_id = ?
+				ORDER BY id DESC
+		        LIMIT 1
+		)
 		;
 		`;
-		connection.query(query, tenant_id, function(err, res){
-			cb(res);
+		connection.query(query, [tenant_id, tenant_id, tenant_id], function(err, res){
+			// console.log(res[0]);
+			// console.log(res[1]);
+			console.log(res[2][1]['property_id']);
+			// console.log(err);
+			let tenantProperty = res[0][0];
+			tenantProperty.requests = res[1];
+			tenantProperty.payments = res[2];
+			cb(tenantProperty);
 		});
 	}
 
