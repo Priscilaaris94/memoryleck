@@ -26,11 +26,11 @@ app.set('view engine', 'ejs');
 
 // Import routes and give the server access to them.
 
-var routes = require("./app/controllers/appController.js");
-app.use('/', routes);
-
 var api = require('./app/controllers/apiController');
 app.use('/api', api);
+
+var routes = require("./app/controllers/appController.js");
+app.use('/', routes);
 
 //App is listening...
 

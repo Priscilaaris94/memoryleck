@@ -9,103 +9,83 @@ var path = require('path');
 // =============================================================
 app.use(bodyParser.json());
 const parseUrlencoded = bodyParser.urlencoded({extended: false});
- 
+
 app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'ejs');
+
+// ORM / DB Connection
+// =============================================================
+const connection = require("../config/connection");
+const ORM = require("../models/orm");
+const orm = new ORM(connection);
 
 // Main Pages
 // =============================================================
 
-app.get('/', function(req, res){ 
-    properties = [{
-        address_one: "118 Peachtree Street",
-        address_two: null,
-        baths: 1,
-        beds: 2,
-        city: "Atlanta",
-        id: 2,
-        img_1: "https://lorempixel.com/g/400/400/cats",
-        landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
-        price: 1200,
-        sqfeet: 860,
-        state: "GA",
-        status: "vacant",
-        tenant_id: null,
-        zip: 30302
-    }, 
-    {
-        address_one: "567 Peachtree Road",
-        address_two: null,
-        baths: 1,
-        beds: 2,
-        city: "Atlanta",
-        id: 2,
-        img_1: "https://lorempixel.com/g/400/400/cats",
-        landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
-        price: 1150,
-        sqfeet: 920,
-        state: "GA",
-        status: "vacant",
-        tenant_id: null,
-        zip: 30302
-    }];
-    // orm.getproperties( ... callback() );
-    // fetch('/api/property').then(b => b.json()).then( d => console.log(d) )
+router.get('/', function(req, res){ 
+  orm.getVacantProperty((properties)=>{
     res.render('pages/allproperties',{title: 'All Properties', properties});
+  });
 });
 
-
-app.get('/property/:id', function(req, res){
-    // orm.getproperty( ... callback() );
-    // fetch('/api/property').then(b => b.json()).then( d => console.log(d) )
-    let property =  {
-        address_one: "567 Peachtree Road",
-        address_two: null,
-        baths: 1,
-        beds: 2,
-        city: "Atlanta",
-        id: 2,
-        img_1: "https://lorempixel.com/g/400/400/cats",
-        landlord_id: "bC8Ol7BDdoY6AZD10w2vRmU0Pab2",
-        price: 1150,
-        sqfeet: 920,
-        state: "GA",
-        status: "vacant",
-        tenant_id: null,
-        zip: 30302
-    };
-    res.render('pages/singleproperty',{title: 'Property ' + property.address_one, property});
+router.get('/property/:id', function(req, res){ 
+    orm.selectDB('property', {id: req.params.id}, (data)=>{
+        let property = data[0];
+        res.render('pages/singleproperty',{title: 'Property ' + property.address_one, property});
+    });
 });
 
 
 // Landlord Pages
 // =============================================================
 
-app.get('/landlord/login', function(req, res){
+router.get('/landlord/login', function(req, res){
     res.render('pages/login', {title: 'Landlord Login', buttonid: 'login-landlord'});
 });
 
-app.get('/landlord/home/:id', function(req, res){
+router.get('/landlord/home/:uid', function(req, res){
+    orm.getLandlordProperties(req.params.uid, (properties)=>{
+        res.render('pages/landlord/landlord',{title: 'My Properties', uid: req.params.uid, properties});
+    });
+});
+
+router.get('/landlord/home/:uid/property/:propertyid?', function(req, res){
+    orm.selectDB('user', {type: 'tenant'}, (tenants)=>{
+
+    if(req.params.propertyid){
+        orm.selectDB('property', {id: req.params.propertyid}, (data)=>{
+            let property = data[0];
+            res.render('pages/landlord/property',{title: 'Update Property', uid: req.params.uid, tenants, property});
+        });
+    } else {
+        let property = {};
+        res.render('pages/landlord/property', {title: 'Add a New Property', uid: req.params.uid, tenants, property});
+    }
+        
+    });
+
+});
+
+router.get('/landlord/home/:uid/request/:requestid', function(req, res){
+    orm.selectDB('request', {id: req.params.requestid}, (data)=>{
+        let request = data[0];
+        res.render('landlord/request',{title: 'Update Request', request});
+    });
+});
+
+router.get('/landlord/home/:uid/request', function(req, res){
     res.render('pages/home', {title: 'My Properties', properties});
 });
 
-app.get('/landlord/home/:id/property', function(req, res){
-    res.render('pages/home', {title: 'My Properties', properties});
-});
-
-app.get('/landlord/home/:id/payment', function(req, res){
-    res.render('pages/home', {title: 'My Properties', properties});
-});
-
-app.get('/landlord/home/:id/request', function(req, res){
-    res.render('pages/home', {title: 'My Properties', properties});
+router.get('/landlord/home/', function(req, res){
+    res.redirect('/landlord/login');
 });
 
 // Tenant Pages
 // =============================================================
 
-app.get('/tenant/login', function(req, res){
-    res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
+/*app.get('/tenant/login', function(req, res){
+    res.render('main/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
 });
 
 app.get('/tenant/home/:id', function(req, res){
@@ -119,7 +99,7 @@ app.get('/tenant/home/:id/payment', function(req, res){
 app.get('/tenant/home/:id/request', function(req, res){
     res.render('pages/home', {title: 'My Tenant Home', property});
 });
-
+*/
 
 // Export routes for server.js to use.
 module.exports = router;

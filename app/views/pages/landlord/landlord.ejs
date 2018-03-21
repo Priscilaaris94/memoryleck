@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../../partials/head %>
+</head>
+<body>
+	<% include landlord-nav %>
+	<div class ="jumbotron">
+		<h1>Your Properties</h1>
+	</div>
+	<div class="container">
+		<br >
+		<div class="row">
+			<div class="col-12">
+				<hr class="featurette-divider" />
+				<% properties.forEach(function(property){ %>
+				<div class="row featurette">
+					<div class="col-md-7">
+						<a href="/landlord/home/<%= uid %>/property/<%= property.id %>">
+							<h2 class="featurette-heading">
+								<%= property.address_one %> <br>
+								<%= property.address_two %>
+								<span class="text-muted"><%= property.city %>, <%= property.state %> <%= property.zip %></span>
+							</h2>
+							<p class="lead">
+								Status: <%= property.status %>
+								Beds: <%= property.beds %>
+								Baths: <%= property.baths %>
+								SqFeet: <%= property.sqfeet %>
+								Monthly Rent: <%= property.price %>
+							</p>
+						</a>
+					</div>
+					<div class="col-md-5">
+						<div class="maintenance-requests">
+							<table>
+								<tr>
+									<th>Status</th>
+									<th>Request</th>
+								</tr>	
+								<% property.requests.forEach(function(request){ %>
+								<a href="/landlord/home/<%= property.landlord_id %>/request/<%= request.id %>">
+									<tr>
+										<td>
+											<%= request.status %>
+										</td>
+										<td>
+											<%= request.date_started %> : <%= request.issue_title %>
+										</td>
+									</tr>
+								</a>
+								<% })%>
+							</table>
+						</div>
+						<div class="payments">
+							<table>
+								<tr>
+									<th>Date</th>
+									<th>Amount</th>
+									<th>Method</th>
+								</tr>	
+								<% property.payments.forEach(function(payment){ %>
+								<tr>
+									<td>
+										<%= payment.date %>
+									</td>
+									<td>
+										<%= payment.amount %>
+									</td>
+									<td>
+										<%= payment.method %>
+									</td>
+								</tr>
+								<% })%>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr class="featurette-divider" />
+				<% })%>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

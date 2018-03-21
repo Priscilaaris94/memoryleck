@@ -1,7 +1,15 @@
 let orm = function(connection){
 
 	////////////////////////////////////////////////////////////////
-	// Generic insert and updates (in good ORM spirit)
+	// Generic CRUD
+
+	this.selectDB = function(table, vals, cb){
+		connection.query(`SELECT * FROM ${table} WHERE ?`, vals, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+			});
+	}
 
 	this.insertDB = function(table, vals, cb){
 		connection.query(`INSERT INTO ${table} SET ?`, vals, function(err, res){
@@ -54,6 +62,20 @@ let orm = function(connection){
 		;
 		`;
 		connection.query(query, function(err, res){
+				console.log(err);
+				console.log(res);
+				cb(res);
+		});
+	}
+
+	this.getPropertyID = function(property_id, cb){
+		let query = `
+		SELECT * 
+		FROM property 
+		WHERE property.id = ?
+		;
+		`;
+		connection.query(query, property_id, function(err, res){
 				console.log(err);
 				console.log(res);
 				cb(res);

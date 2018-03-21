@@ -22,7 +22,6 @@ const orm = new ORM(connection);
 
 router.route("/property")
 .get(function(req, res) {
-  console.log('getting api/property');
   orm.getVacantProperty((data)=>{
     res.json(data);
   })
@@ -80,19 +79,19 @@ router.route("/payment")
 .post(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
   orm.postPayment(JSON.parse(req.body.payment), function(){
-    res.redirect('/tenant-home');
+    res.redirect('/tenant/home');
    });
 })
 .put(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
   orm.putPayment(JSON.parse(req.body.payment), function(){
-    res.redirect('/tenant-home');
+    res.redirect('/tenant/home');
    });
 })
 .delete(function(req, res) {
   if(!req.body.id){return res.send("Bad request")} 
   orm.deletePayment(req.body.id, function(){
-    res.redirect('/tenant-home');
+    res.redirect('/tenant/home');
    });
 });
 
