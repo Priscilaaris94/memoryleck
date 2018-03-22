@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 // ORM / DB Connection
 // =============================================================
 const connection = require("../config/connection");
-const ORM = require("../models/orm");
+const ORM = require("../config/orm");
 const orm = new ORM(connection);
 
 // Main Pages

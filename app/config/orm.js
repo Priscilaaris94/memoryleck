@@ -1,237 +1,173 @@
-//Need to require connection.js so that the ORM can communicate/talk with the database.
+let orm = function(connection){
 
-var connection = require("./connection.js");
+  ////////////////////////////////////////////////////////////////
+  // Generic CRUD
 
-
-
-// Helper function for SQL syntax.
-
-// Let's say we want to pass 3 values into the mySQL query.
-
-// In order to write the query, we need 3 question marks.
-
-// The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
-
-// ["?", "?", "?"].toString() => "?,?,?";
-
-function printQuestionMarks(num) {
-
-    var arr = [];
-
-  
-
-    for (var i = 0; i < num; i++) {
-
-      arr.push("?");
-
-    }
-
-  
-
-    return arr.toString();
-
+  this.selectDB = function(table, vals, cb){
+    connection.query(`SELECT * FROM ${table} WHERE ?`, vals, function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+      });
   }
 
-  
+  this.insertDB = function(table, vals, cb){
+    connection.query(`INSERT INTO ${table} SET ?`, vals, function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+      });
+  }
 
-  // Helper function to convert object key/value pairs to SQL syntax
+  this.upsertDB = function(table, vals, cb){
+    let query = `
+    INSERT INTO ${table} 
+    SET ?
+    ON DUPLICATE KEY UPDATE ?
+    `;
+    let dedupe = {};
+    for(let i in vals){
+      if(i !== 'id'){ dedupe[i] = vals[i] }
+    }
+    connection.query(query, [vals, dedupe], function(err, res){
+      console.log(err);
+      console.log(res);
+      cb(res);
+    });
+  }
 
-  function objToSql(ob) {
+  this.deleteDB = function(table, key, cb){
+    connection.query(`DELETE FROM ${table} WHERE id = ?`, 
+      key,
+      function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+      });
+  }
 
-    var arr = [];
+  ////////////////////////////////////////////////////////////////
+  // Property Post and update
 
-  
+  this.postProperty = function(property, cb){
+    connection.query(`INSERT INTO property SET ?`, property, function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+      });
+  }
 
-    // loop through the keys and push the key/value as a string int arr
+  this.updateProperty = function(updates, property_id, cb){
+    connection.query(`UPDATE property SET ? WHERE ?`, 
+      [updates, {id: property_id}],
+      function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+      });
+  }
 
-    for (var key in ob) {
+  ////////////////////////////////////////////////////////////////
+  // Property Queries
 
-      var value = ob[key];
+  this.getVacantProperty = function(cb){
+    let query = `
+    SELECT * 
+    FROM property 
+    WHERE property.tenant_id IS NULL
+    AND property.status = 'vacant'
+    ;
+    `;
+    connection.query(query, function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+    });
+  }
 
-      // check to skip hidden properties
+  this.getPropertyID = function(property_id, cb){
+    let query = `
+    SELECT * 
+    FROM property 
+    WHERE property.id = ?
+    ;
+    `;
+    connection.query(query, property_id, function(err, res){
+        console.log(err);
+        console.log(res);
+        cb(res);
+    });
+  }
 
-      if (Object.hasOwnProperty.call(ob, key)) {
+  this.getTenantProperties = function(tenant_id, cb){
+    let query = `
+    SELECT *
+    FROM property
+    WHERE property.tenant_id = ?
+    ORDER BY id DESC
+    LIMIT 1
+    ;
+    SELECT request.*
+    FROM request
+    WHERE property_id =
+    (SELECT id
+        FROM property
+        WHERE property.tenant_id = ?
+        ORDER BY id DESC
+            LIMIT 1
+    )
+    ;
+    SELECT payment.*
+    FROM payment
+    WHERE property_id =
+    (SELECT id
+        FROM property
+        WHERE property.tenant_id = ?
+        ORDER BY id DESC
+            LIMIT 1
+    )
+    ;
+    `;
+    connection.query(query, [tenant_id, tenant_id, tenant_id], function(err, res){
+      if(err || !res[0] || !res[0][0]){ return cb('error');}
+      let tenantProperty = res[0][0];
+      tenantProperty.requests = res[1];
+      tenantProperty.payments = res[2];
+      cb(tenantProperty);
+    });
+  }
 
-        // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
-
-        if (typeof value === "string" && value.indexOf(" ") >= 0) {
-
-          value = "'" + value + "'";
-
-        }
-
-        // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
-
-        // e.g. {sleepy: true} => ["sleepy=true"]
-
-        arr.push(key + "=" + value);
-
+  this.getLandlordProperties = function(landlord_id, cb){
+    let query = `
+    SELECT *
+    FROM property
+    WHERE property.landlord_id = ?
+    ;
+    SELECT payment.*
+    FROM property
+    LEFT OUTER JOIN payment 
+    ON property.id = payment.property_id
+    WHERE property.landlord_id = ?
+    AND property.tenant_id = payment.tenant_id
+    ;
+    SELECT request.*
+    FROM property
+    LEFT OUTER JOIN request
+    ON property.id = request.property_id
+    WHERE property.landlord_id = ?
+    ;
+    `;
+    connection.query(query, [landlord_id, landlord_id, landlord_id], function(err, res){
+      if(err || !res[0] || !res[0][0]){ return cb('error');}
+      let landlordProperties = res[0];
+      for(let property of landlordProperties){
+        property.payments = res[1].filter(payment => payment.property_id == property.id);
+        property.requests = res[2].filter(request => request.property_id == property.id);
       }
-
-    }
-
-  
-
-    // translate array of strings to a single comma-separated string
-
-    return arr.toString();
-
+      cb(landlordProperties);
+    });
   }
 
-  
-
-
-
-//Object for all our SQL statement functions.
-
-//Create the methods that will execute the necessary MySQL commands in the controllers.
-
-//These are the methods you will need to use in order to retrieve and store data in your database.
-
-var orm = {
-
-    //Select all function/query
-
-    all: function(tableInput, cb) {
-
-      var queryString = "SELECT * FROM " + tableInput + ";";
-
-      connection.query(queryString, function(err, result) {
-
-        if (err) {
-
-          throw err;
-
-        }
-
-        cb(result);
-
-      });
-
-    },
-
-
-
-    //Create function/query
-
-    create: function(table, cols, vals, cb) {
-
-      var queryString = "INSERT INTO " + table;
-
-  
-
-      queryString += " (";
-
-      queryString += cols.toString();
-
-      queryString += ") ";
-
-      queryString += "VALUES (";
-
-      queryString += printQuestionMarks(vals.length);
-
-      queryString += ") ";
-
-  
-
-      console.log(queryString);
-
-  
-
-      connection.query(queryString, vals, function(err, result) {
-
-        if (err) {
-
-          throw err;
-
-        }
-
-  
-
-        cb(result);
-
-      });
-
-    },
-
-
-
-    //Update function/query.
-
-    // An example of objColVals would be {name: panther, sleepy: true}
-
-    update: function(table, objColVals, condition, cb) {
-
-      var queryString = "UPDATE " + table;
-
-  
-
-      queryString += " SET ";
-
-      queryString += objToSql(objColVals);
-
-      queryString += " WHERE ";
-
-      queryString += condition;
-
-  
-
-      console.log(queryString);
-
-      connection.query(queryString, function(err, result) {
-
-        if (err) {
-
-          throw err;
-
-        }
-
-  
-
-        cb(result);
-
-      });
-
-    },
-
-
-
-    //Delete function/query
-
-    delete: function(table, condition, cb) {
-
-      var queryString = "DELETE FROM " + table;
-
-      queryString += " WHERE ";
-
-      queryString += condition;
-
-  
-
-      connection.query(queryString, function(err, result) {
-
-        if (err) {
-
-          throw err;
-
-        }
-
-  
-
-        cb(result);
-
-      });
-
-    }
-
-  
-
-  };
-
-
-
-//Export the orm object.
+}
 
 module.exports = orm;
-
-    

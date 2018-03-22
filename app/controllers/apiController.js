@@ -12,7 +12,7 @@ const parseUrlencoded = bodyParser.urlencoded({extended: false});
 // ORM / DB Connection
 // =============================================================
 const connection = require("../config/connection");
-const ORM = require("../models/orm");
+const ORM = require("../config/orm");
 const orm = new ORM(connection);
 
 
