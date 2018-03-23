@@ -15,9 +15,10 @@
 				<form data-id="<%= request.id %>" data-uid="<%= uid %>" data-property="<%= request.property_id %>"  data-user="landlord">
 
 					<% include ../../partials/request-fields %>
-
-					<button class="btn" type="submit"><%= title %></button>
-					<a href="/landlord/home/<%= uid %>">Cancel</a>
+					<div class="d-flex align-items-center">
+						<button class="btn btn-outline-success btn-lg dark" type="submit"><%= title %></button>
+						<a class="mx-5" href="/landlord/home/<%= uid %>">Cancel</a>
+					</div>
 				</form>
 			</div>
 		</div>

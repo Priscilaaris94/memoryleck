@@ -2,12 +2,16 @@
 <head>
 	<title><%= title %></title>
 	<% include ../../partials/head %>
-	<link rel="stylesheet" type="text/css" href="/assets/css/payments.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
 </head>
 <body>
 	<% include tenant-nav %>
-	<div class="jumbotron">
-		<h1><%= title %></h1>
+	<div class="jumbotron d-flex justify-content-between">
+		<div>
+			<h1 class="display-4 caption">
+				<span class="tenant">Make</span> <span span class="pros">Payment</span>
+			</h1>
+		</div>
 	</div>
 	<div class="container">
 		<div class="row">
@@ -16,8 +20,10 @@
 					
 					<% include ../../partials/payment-fields %>
 
-					<button class="btn" type="submit"><%= title %></button>
-					<a href="/tenant/home/<%= uid %>">Cancel</a>
+					<div class="d-flex align-items-center">
+						<button class="btn btn-outline-success btn-lg dark" type="submit"><%= title %></button>
+						<a class="mx-5" href="/tenant/home/<%= uid %>">Cancel</a>
+					</div>
 				</form>
 			</div>
 		</div>

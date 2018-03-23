@@ -2,13 +2,15 @@
 <head>
 	<title><%= title %></title>
 	<% include ../../partials/head %>
-	<link rel="stylesheet" type="text/css" href="/assets/css/tenant_props.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
 </head>
 <body>
 	<% include tenant-nav %>
 	<div class="jumbotron d-flex justify-content-between">
 		<div>
-			<h1><%= title %></h1>
+			<h1 class="display-4 caption">
+				<span class="tenant">My</span> <span span class="pros">Property</span>
+			</h1>
 		</div>
 		<div class="px-2">
 			<h2 class="featurette-heading">
@@ -21,7 +23,6 @@
 				Monthly Rent: <%= property.price %>
 			</p>
 		</div>
-
 	</div>
 	<div class="container">
 		<br>
@@ -57,7 +58,7 @@
 							</tr>
 							<% })%>
 						</table>
-						<a class="btn btn-secondary" href="/tenant/home/<%= uid %>/newrequest/<%= property.id %>"> Add New Request </a>
+						<a class="btn btn-outline-success btn-lg dark mt-5" href="/tenant/home/<%= uid %>/newrequest/<%= property.id %>"> Add New Request </a>
 					</div>
 					<div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
 						<table class="table">
@@ -80,7 +81,7 @@
 							</tr>
 							<% })%>
 						</table>
-						<a class="btn btn-secondary" href="/tenant/home/<%= uid %>/newpayment/<%= property.id %>"> Add New Payment</a>
+						<a class="btn btn-outline-success btn-lg dark mt-5" href="/tenant/home/<%= uid %>/newpayment/<%= property.id %>"> Add New Payment</a>
 					</div>
 				</div>
 				<hr class="featurette-divider" />
