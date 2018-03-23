@@ -2,7 +2,7 @@
 _*Team Memory Leak*_
 
 property managment website:
-display and keep track of your porperties
+display and keep track of your properties
 
 ### Project Links
 Heroku https://group-pr2.herokuapp.com/
