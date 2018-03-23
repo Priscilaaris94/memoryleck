@@ -33,15 +33,6 @@ router.route("/property")
   })
 });
 
-// post includes image upload
-// router.use("/updateproperty", function(req, res, next){
-//   // upload.single('file-to-upload');
-//   next();
-// });
-// router.use("/updateproperty", function(req, res, next){
-//   next();
-// });
-
 router.post("/updateproperty", upload.single('img_1'), function(req, res) {
   // if(!req.body.property){return res.send("Bad request")}
   console.log('multer run', req.file);
@@ -53,8 +44,6 @@ router.post("/updateproperty", upload.single('img_1'), function(req, res) {
   if(req.file){
     property.img_1 = req.file.path;
   }
-
- // res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
    orm.upsertDB('property', property, function(){
     res.send('/landlord/home/' + property.landlord_id);
    });

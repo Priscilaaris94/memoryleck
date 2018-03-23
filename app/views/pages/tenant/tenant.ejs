@@ -41,18 +41,24 @@
 						<table class="table">
 							<tr>
 								<th>Status</th>
-								<th>Request</th>
+								<th>Date Started</th>
+								<th>Request Title</th>
 							</tr>	
 							<% property.requests.forEach(function(request){ %>
 							<tr>
-								<td>
+								<td class="request-status">
 									<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
 										<%= request.status %>
 									</a>
 								</td>
-								<td>
+								<td class="request-date">
 									<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
-										<%= request.date_started %> : <%= request.issue_title %>
+										<%= request.date_started %>
+									</a>
+								</td>
+								<td class="request-title">
+									<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
+										<%= request.issue_title %>
 									</a>
 								</td>
 							</tr>
@@ -69,13 +75,13 @@
 							</tr>	
 							<% property.payments.forEach(function(payment){ %>
 							<tr>
-								<td>
+								<td class="payment-date">
 									<%= payment.date %>
 								</td>
-								<td>
+								<td class="payment-amount">
 									<%= payment.amount %>
 								</td>
-								<td>
+								<td class="payment-method">
 									<%= payment.method %>
 								</td>
 							</tr>
