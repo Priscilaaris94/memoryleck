@@ -9,18 +9,18 @@ body {
 navbar {
 	z-index: 5;
 }
-a {
+a, .nav-link.nav-item {
 	margin-left: 50px;
 	margin-right: 50px;
 }
 .navbar-brand {
 	color: white;
 }
-li a {
+li a, .nav-link.nav-item {
 	color: white;
 }
 
-a:hover {
+a:hover, .nav-link.nav-item:hover {
 	color: #629920;
 }
 
@@ -46,9 +46,13 @@ h1.rental_text {
 	font-family: 'Oswald', sans-serif;
 	color: #629920;
 }
-.btn btn-outline-success {
+.btn.btn-outline-success {
 	color: white;
 }
+.btn.btn-outline-success.dark{
+	background-color: #153F66;
+}
+
 .listing {
 	margin-top: -15px;
 	background-color: #E2E2E2;
@@ -69,6 +73,11 @@ h1.rental_text {
 .featurette {
 	border-bottom-color: 1px #629920;
 }
+.featurette a{
+	color: inherit;
+}
+
+
 /* VIDEO */
 .main_video {
 	position: relative;
@@ -79,6 +88,7 @@ h1.rental_text {
 	height: 100%;
 	width: 100%;
 	z-index: -3;
+	overflow: hidden;
 }
 .poster {
 	display: block !important;
@@ -98,9 +108,7 @@ html {
 	min-height: 100%;
 }
 /* Margin bottom by footer height */
-body {
-	margin-bottom: 85px;
-}
+
 .tag {
 	color: #ffffff;
 }
