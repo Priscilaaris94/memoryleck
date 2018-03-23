@@ -3,16 +3,17 @@
 	<title><%= title %></title>
 	<% include ../partials/head %>
 	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+	<script src="/scripts/search.js"></script>
 </head>
 <body>
 	<% include ../partials/nav %>
 	<div class="jumbotron jumbotron-fluid">
-	  <div class="container">
-		  <h1 class="display-4 text-center caption">
-		  	<span class="tenant">Available</span><span span class="pros">Properties</span>
-		  </h1>
-	    <p class="lead text-center">Your next home is a scroll, click and payment away.</p>
-	  </div>
+		<div class="container">
+			<h1 class="display-4 text-center caption">
+				<span class="tenant">Available</span><span span class="pros">Properties</span>
+			</h1>
+			<p class="lead text-center">Your next home is a scroll, click and payment away.</p>
+		</div>
 	</div>
 	<% include ../partials/video %>
 	<div class="container">
@@ -28,23 +29,23 @@
 		</div>
 		<br >
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12" id="search-results">
 				<hr class="featurette-divider" />
 				<% properties.forEach(function(property){ %>
 				<div class="row featurette">
 					<div class="col-md-7">
 						<a href="/property/<%= property.id %>">
-						<h2 class="featurette-heading">
-							<%= property.address_one %> <br>
-							<%= property.address_two %>
-							<span class="text-muted"><%= property.city %>, <%= property.state %> <%= property.zip %></span>
-						</h2>
-						<p class="lead">
-							Beds: <%= property.beds %>
-							Baths: <%= property.baths %>
-							SqFeet: <%= property.sqfeet %> <br>
-							Monthly Rent: <%= property.price %><br>
-						</p>
+							<h2 class="featurette-heading">
+								<%= property.address_one %> <br>
+								<%= property.address_two %>
+								<span class="text-muted"><%= property.city %>, <%= property.state %> <%= property.zip %></span>
+							</h2>
+							<p class="lead">
+								Beds: <%= property.beds %>
+								Baths: <%= property.baths %>
+								SqFeet: <%= property.sqfeet %> <br>
+								Monthly Rent: <%= property.price %><br>
+							</p>
 						</a>
 					</div>
 					<div class="col-md-5">
