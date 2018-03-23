@@ -1,17 +1,17 @@
 @charset "UTF-8";
 /* CSS Document */
 
-
+body {
+	margin: 0 auto;
+}
 .tab-content {
 	background-color: #EBEBEB;
 	border: 1px solid #EBEBEB;
 }
-
 /* NAVBAR */
 .nav .nav-tabs {
 	border: 1px solid #EBEBEB;
 }
-	
 navbar {
 	z-index: 5;
 }
@@ -25,16 +25,18 @@ a {
 li a {
 	color: white;
 }
-
 a:hover {
 	color: #629920;
 }
-
 .active {
 	color: none;
 }
-
 /* JUMBOTRON */
+.jumbotron {
+	margin-top: -50px;
+	height: 200px;
+	z-index: 4;
+}
 .tenant {
 	font-family: 'Oswald', sans-serif;
 	color: #629920;
@@ -47,7 +49,31 @@ h1.rental_text {
 	color: #629920;
 }
 
+/* FORM */
 
+.form_outline {
+	width: 80%;
+}
+.title_prop {
+	background-color: #629920;
+	color: #ffffff;
+	width: 100%;
+	height: 40px;
+}
+h3 {
+ margin: 5px 0 0 20px;
+ font-size: 18px;
+}
+.container.form_outline {
+	margin-top: 20px;
+	border: solid 1px #629920;
+}
+label {
+	font-size: 12px;
+}
+.form-control {
+	font-size: 12px;
+}
 /* FOOTER */
 html {
 	position: relative;
@@ -71,8 +97,6 @@ body {
 	text-align: center;
 	z-index: 100;
 }
- p .text-muted  {
+p .text-muted {
 	font-size: 12px;
 }
-
-

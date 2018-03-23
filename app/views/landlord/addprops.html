@@ -15,7 +15,7 @@
 </head>
 <body>
 <header>
-  <nav class="navbar navbar-expand-lg" style="background-color: #153F66;"> <a class="navbar-brand" href="#"><button type="button" class="btn btn-outline-success btn-md btn-group">Back</button></a><a class="navbar-brand" href="#"><button type="button" class="btn btn-outline-success btn-md">+ Add Property</button></a>
+  <nav class="navbar navbar-expand-lg" style="background-color: #153F66;"> <a class="navbar-brand" href="#"><button type="button" class="btn btn-outline-success btn-md btn-group">Back &#124; Cancel</button></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li>
@@ -33,10 +33,85 @@
 </div>
 
 <!-- container -->
-<div class="container">
-  
-  
-  <!-- /.row --> 
+<div class="container form_outline">
+	<div class="row title_prop">
+		<h3>Add / Edit Property</h3>
+	</div>	
+	
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputAddress1">Adress Line</label>
+      <input type="text" class="form-control" id="inputAddress1" placeholder="">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputAddress2">Address Line</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="">
+    </div>
+  </div>
+		
+<div class="form-row">		
+<div class="form-group col-md-6">
+      <label for="inputAddress1">City</label>
+      <input type="text" class="form-control" id="inputCity1" placeholder="">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputCity2">City</label>
+      <input type="text" class="form-control" id="inputCity2" placeholder="">
+    </div>
+  </div>
+	
+<div class="form-row">		
+<div class="form-group col-md-6">
+      <label for="inputZip1">Zip</label>
+      <input type="text" class="form-control" id="inputZip1" placeholder="">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputZip2">Zip</label>
+      <input type="text" class="form-control" id="inputZip2" placeholder="">
+    </div>
+  </div>
+		
+<div class="form-row">		
+<div class="form-group col-md-3">
+      <label for="inputBeds">Beds</label>
+      <input type="text" class="form-control" id="inputBeds" placeholder="2">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputBath">Bath</label>
+      <input type="text" class="form-control" id="inputBath" placeholder="2">
+    </div>
+<div class="form-group col-md-3">
+      <label for="inputFeet">Sq Feet</label>
+      <input type="text" class="form-control" id="inputFeet" placeholder="1200">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputPrice">Price</label>
+      <input type="text" class="form-control" id="inputPrice" placeholder="900">
+    </div>	
+</div>		
+<div class="form-row">		
+ <div class="form-group col-md-6 col-sm-4">
+  <label for="stat">Status</label>
+  <select class="form-control" id="stat">
+    <option>Occupied</option>
+    <option>Vacant</option>
+  </select>
+</div>
+ <div class="form-group col-md-6 col-sm-4">
+  <label for="tenant">Status</label>
+  <select class="form-control" id="tenant">
+    <option>Michael Madison</option>
+    <option>Jousha Murry</option>
+	<option>Olivia Mathew</option>
+	<option>Christopher Dunn</option>
+	<option>Charles Wells</option>
+   <option>Ruby Martin</option>  
+ </select>
+</div>
+</div>
+</form>
+<!-- /.row  --> 
 </div>
 <!-- /.container --> 
 
