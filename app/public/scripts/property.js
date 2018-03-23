@@ -25,6 +25,7 @@
 		for(let i of event.currentTarget){
 			if(i.value){ property[i.name] = i.value; }
 		}
+		property.testimage = "C:\\Users\\ADP21\\Downloads\\Capture.JPG";
 		property.landlord_id = event.currentTarget.getAttribute('data-uid');
 		if(x = event.currentTarget.getAttribute('data-id')){
 			property.id = x;

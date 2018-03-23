@@ -44,7 +44,7 @@ router.route("/property")
 
 router.post("/updateproperty", upload.single('user_image'), function(req, res) {
   console.log('multer run', req.file);
-  console.log(req.body.user_image);
+  console.log(req.body);
   // let img_1 = req.file;
   res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
   // if(!req.body.property){return res.send("Bad request")}
