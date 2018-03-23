@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Simple Multer Upload Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!-- Here is the html input form that provide the folder "browse" capability and the upload submit button -->
+    <form action="/bob" enctype="multipart/form-data" method="post">
+        <input type="file" name="file-to-upload"> 
+        <br> First name:
+        <br>
+        <input type="text" name="firstname">
+        <br> Last name:
+        <br>
+        <input type="text" name="lastname">
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ WOULD DO WHATEVER ELSE WE NEED WHEN WE SERVE THAT PAGE
 */
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');  //This just sends the index.html file when the browser loads the root url
+  res.sendFile(__dirname + '/index-test1.html');  //This just sends the index.html file when the browser loads the root url
 });
 
 
@@ -31,15 +31,15 @@ File will be automatically renamed.
 The file name ('file-to-upload') must match the name attribute in your html input element
 */
 
-app.post('/', upload.single('file-to-upload'), (req, res) => {
+app.post('/bob', upload.single('file-to-upload'), (req, res) => {
   //at this point the file is already uploaded to the "uploads" folder
   //everything else inside this code block is just callback logic for what we want to do after the user submits the image
 
   //we should grab the filename that multer created for this upload, and store the filename and path in the database
   //see bottom of this code for an example logging of the req.file object
   var relPathAndFilename = req.file.path;
-  console.log("req.file:", req.file);
   //console.log("req.file.path:", relPathAndFilename); //just logging the relative path to see what it looks like
+  console.log(req.body);
 
   //in this demo we will just reload the page with a redirect
   //in the real app, the relPathAndFilename should be stored in the db and associated with a property id
