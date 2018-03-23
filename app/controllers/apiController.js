@@ -42,15 +42,18 @@ router.route("/property")
 //   next();
 // });
 
-router.post("/updateproperty", upload.single('user_image'), function(req, res) {
+router.post("/updateproperty", upload.single('img_1'), function(req, res) {
+  // if(!req.body.property){return res.send("Bad request")}
   console.log('multer run', req.file);
   console.log(req.body);
-  // let img_1 = req.file;
-  res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
-  // if(!req.body.property){return res.send("Bad request")}
-  //  orm.upsertDB('property', JSON.parse(req.body.property), function(){
-  //   res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
-  //  });
+  if(req.file){
+    req.body.img_1 = req.file.path;
+  } 
+
+  // res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
+   orm.upsertDB('property', JSON.parse(req.body), function(){
+    res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
+   });
 });
 
 // Tenant & Landlord Properties
