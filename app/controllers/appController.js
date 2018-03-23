@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-var path = require('path');
+const path = require('path');
 
 // Middleware
 // =============================================================

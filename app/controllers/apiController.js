@@ -8,6 +8,12 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const parseUrlencoded = bodyParser.urlencoded({extended: false});
 
+// multer for image upload
+const multer = require('multer');
+const upload = multer({
+  dest: 'app/public/uploads/' // this configures multer to save your files into a directory called "uploads"
+}); 
+
 
 // ORM / DB Connection
 // =============================================================
@@ -25,12 +31,26 @@ router.route("/property")
   orm.getVacantProperty((data)=>{
     res.json(data);
   })
-})
-.post(function(req, res) {
-  if(!req.body.property){return res.send("Bad request")}
-   orm.upsertDB('property', JSON.parse(req.body.property), function(){
-    res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
-   });
+});
+
+// post includes image upload
+// router.use("/updateproperty", function(req, res, next){
+//   // upload.single('file-to-upload');
+//   next();
+// });
+// router.use("/updateproperty", function(req, res, next){
+//   next();
+// });
+
+router.post("/updateproperty", upload.single('user_image'), function(req, res) {
+  console.log('multer run', req.file);
+  console.log(req.body.user_image);
+  // let img_1 = req.file;
+  res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
+  // if(!req.body.property){return res.send("Bad request")}
+  //  orm.upsertDB('property', JSON.parse(req.body.property), function(){
+  //   res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
+  //  });
 });
 
 // Tenant & Landlord Properties
@@ -57,7 +77,7 @@ router.route("/property/landlord/:id")
 router.route("/payment")
 .post(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
-  console.log(JSON.parse(req.body.payment));
+  // console.log(JSON.parse(req.body.payment));
   orm.upsertDB('payment', JSON.parse(req.body.payment), function(){
     res.send('success');
    });
@@ -87,7 +107,7 @@ router.route("/user")
 .post(function(req, res) {
   if(!req.body.uid || !req.body.email){return res.send("Bad request")}
   let redirectto = req.body.type === 'landlord' ? `/landlord/home/${req.body.uid}` : `/tenant/home/${req.body.uid}`;
-  console.log(req.body);
+  // console.log(req.body);
   orm.upsertDB('user', {
     uid: req.body.uid,
     email: req.body.email,

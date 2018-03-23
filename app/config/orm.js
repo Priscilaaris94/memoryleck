@@ -5,16 +5,16 @@ let orm = function(connection){
 
   this.selectDB = function(table, vals, cb){
     connection.query(`SELECT * FROM ${table} WHERE ?`, vals, function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
       });
   }
 
   this.insertDB = function(table, vals, cb){
     connection.query(`INSERT INTO ${table} SET ?`, vals, function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
       });
   }
@@ -30,8 +30,8 @@ let orm = function(connection){
       if(i !== 'id'){ dedupe[i] = vals[i] }
     }
     connection.query(query, [vals, dedupe], function(err, res){
-      console.log(err);
-      console.log(res);
+      // console.log(err);
+      // console.log(res);
       cb(res);
     });
   }
@@ -40,8 +40,8 @@ let orm = function(connection){
     connection.query(`DELETE FROM ${table} WHERE id = ?`, 
       key,
       function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
       });
   }
@@ -51,8 +51,8 @@ let orm = function(connection){
 
   this.postProperty = function(property, cb){
     connection.query(`INSERT INTO property SET ?`, property, function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
       });
   }
@@ -61,8 +61,8 @@ let orm = function(connection){
     connection.query(`UPDATE property SET ? WHERE ?`, 
       [updates, {id: property_id}],
       function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
       });
   }
@@ -79,8 +79,8 @@ let orm = function(connection){
     ;
     `;
     connection.query(query, function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
     });
   }
@@ -93,8 +93,8 @@ let orm = function(connection){
     ;
     `;
     connection.query(query, property_id, function(err, res){
-        console.log(err);
-        console.log(res);
+        // console.log(err);
+        // console.log(res);
         cb(res);
     });
   }
