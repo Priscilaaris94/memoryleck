@@ -9,24 +9,28 @@ body {
 navbar {
 	z-index: 5;
 }
-a, .nav-link.nav-item {
-	margin-left: 50px;
-	margin-right: 50px;
-}
 .navbar-brand {
 	color: white;
 }
-li a, .nav-link.nav-item {
+
+.navbar-nav > .nav-link {
+	margin-left: 50px;
+	margin-right: 50px;
 	color: white;
 }
+a{
+	color: #153F10;
+}
 
-a:hover, .nav-link.nav-item:hover {
+a:hover, 
+.navbar-nav > .nav-link:hover {
 	color: #629920;
 }
 
 .active {
-	color: none;
+	color: inherit;
 }
+
 /* JUMBOTRON */
 .jumbotron {
 	margin-top: -50px;

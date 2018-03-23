@@ -40,7 +40,7 @@ router.get('/property/:id', function(req, res){
 // =============================================================
 
 router.get('/landlord/login', function(req, res){
-    res.render('pages/login', {title: 'Landlord Login', buttonid: 'login-landlord'});
+    res.render('pages/login', {title: 'Landlord', buttonid: 'login-landlord'});
 });
 
 router.get('/landlord/home/:uid', function(req, res){
@@ -85,7 +85,7 @@ router.get('/landlord/home/', function(req, res){
 // =============================================================
 
 router.get('/tenant/login', function(req, res){
-    res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
+    res.render('pages/login', {title: 'Tenant', buttonid: 'login-tenant'});
 });
 
 router.get('/tenant/home/:uid', function(req, res){
