@@ -46,13 +46,17 @@ router.post("/updateproperty", upload.single('img_1'), function(req, res) {
   // if(!req.body.property){return res.send("Bad request")}
   console.log('multer run', req.file);
   console.log(req.body);
+  let property = {};
+  for(let i in req.body){
+    property[i] = req.body[i];
+  }
   if(req.file){
-    req.body.img_1 = req.file.path;
-  } 
+    property.img_1 = req.file.path;
+  }
 
-  // res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
-   orm.upsertDB('property', JSON.parse(req.body), function(){
-    res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
+ // res.send('/landlord/home/bC8Ol7BDdoY6AZD10w2vRmU0Pab2');
+   orm.upsertDB('property', property, function(){
+    res.send('/landlord/home/' + property.landlord_id);
    });
 });
 
