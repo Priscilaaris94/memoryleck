@@ -7,12 +7,16 @@ require("dotenv").config();
 //Define database connection properties (host, user, password, and database name)
 //Use production database when deployed.
 
-if (process.env.JAWSDB_URL) {
+if (true || process.env.JAWSDB_URL) {
   //Heroku deployment
   var connection = mysql.createConnection({
-      host: process.env.JAWSDB_URL,
-      multipleStatements: true
-      });
+    host: process.env.JAWS_CONFIG_host,
+    port: process.env.JAWS_CONFIG_port,
+    user: process.env.JAWS_CONFIG_user,
+    password: process.env.JAWS_CONFIG_password,
+    database: process.env.JAWS_CONFIG_database,
+    multipleStatements: true
+  });
 }
 
 else {

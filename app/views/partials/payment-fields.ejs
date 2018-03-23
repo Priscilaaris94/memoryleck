@@ -1,10 +1,10 @@
-<label>date</label>
+<label>Date</label>
 <input type="date" name="date" value="<%= payment.date %>">
 
-<label>amount</label>
+<label>Amount</label>
 <input type="number" name="amount" value="<%= payment.amount %>">
 
-<label>method</label>
+<label>Method</label>
 <select name="method">
 	<option value="Credit Card" <% if(payment.method == 'Credit Card'){ %>selected<% } %>>Credit Card</option>
 	<option value="Check" <% if(payment.method == 'Check'){ %>selected<% } %>>Check</option>

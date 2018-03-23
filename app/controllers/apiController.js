@@ -8,11 +8,17 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const parseUrlencoded = bodyParser.urlencoded({extended: false});
 
+// multer for image upload
+const multer = require('multer');
+const upload = multer({
+  dest: 'app/public/uploads/' // this configures multer to save your files into a directory called "uploads"
+}); 
+
 
 // ORM / DB Connection
 // =============================================================
 const connection = require("../config/connection");
-const ORM = require("../models/orm");
+const ORM = require("../config/orm");
 const orm = new ORM(connection);
 
 
@@ -25,11 +31,21 @@ router.route("/property")
   orm.getVacantProperty((data)=>{
     res.json(data);
   })
-})
-.post(function(req, res) {
-  if(!req.body.property){return res.send("Bad request")}
-   orm.upsertDB('property', JSON.parse(req.body.property), function(){
-    res.send('/landlord/home/' + JSON.parse(req.body.property)['landlord_id']);
+});
+
+router.post("/updateproperty", upload.single('img_1'), function(req, res) {
+  // if(!req.body.property){return res.send("Bad request")}
+  console.log('multer run', req.file);
+  console.log(req.body);
+  let property = {};
+  for(let i in req.body){
+    property[i] = req.body[i];
+  }
+  if(req.file){
+    property.img_1 = req.file.path;
+  }
+   orm.upsertDB('property', property, function(){
+    res.send('/landlord/home/' + property.landlord_id);
    });
 });
 
@@ -57,7 +73,7 @@ router.route("/property/landlord/:id")
 router.route("/payment")
 .post(function(req, res) {
   if(!req.body.payment){return res.send("Bad request")} 
-  console.log(JSON.parse(req.body.payment));
+  // console.log(JSON.parse(req.body.payment));
   orm.upsertDB('payment', JSON.parse(req.body.payment), function(){
     res.send('success');
    });
@@ -87,7 +103,7 @@ router.route("/user")
 .post(function(req, res) {
   if(!req.body.uid || !req.body.email){return res.send("Bad request")}
   let redirectto = req.body.type === 'landlord' ? `/landlord/home/${req.body.uid}` : `/tenant/home/${req.body.uid}`;
-  console.log(req.body);
+  // console.log(req.body);
   orm.upsertDB('user', {
     uid: req.body.uid,
     email: req.body.email,

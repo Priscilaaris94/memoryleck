@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../../partials/head %>
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/payment.css">
+</head>
+<body>
+	<% include landlord-nav %>
+	<div class ="jumbotron">
+		<div class="container">
+			<h1 class="display-4 text-center caption"><span class="tenant">Your</span><span span class="pros">Properties</span></h1>
+			<p class="lead text-center">Review payment and maintenance request activity.</p>
+		</div>
+	</div>
+	<div class="container">
+		<br>
+		<% properties.forEach(function(property){ %>
+
+		<% })%>
+	</div><!--container-->
+</body>
+</html>

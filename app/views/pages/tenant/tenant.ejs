@@ -2,12 +2,16 @@
 <head>
 	<title><%= title %></title>
 	<% include ../../partials/head %>
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+	<script src="/scripts/dashboard.js"></script>
 </head>
 <body>
 	<% include tenant-nav %>
 	<div class="jumbotron d-flex justify-content-between">
 		<div>
-			<h1><%= title %></h1>
+			<h1 class="display-4 caption">
+				<span class="tenant">My</span> <span span class="pros">Property</span>
+			</h1>
 		</div>
 		<div class="px-2">
 			<h2 class="featurette-heading">
@@ -20,7 +24,6 @@
 				Monthly Rent: <%= property.price %>
 			</p>
 		</div>
-
 	</div>
 	<div class="container">
 		<br>
@@ -39,24 +42,30 @@
 						<table class="table">
 							<tr>
 								<th>Status</th>
-								<th>Request</th>
+								<th>Date Started</th>
+								<th>Request Title</th>
 							</tr>	
 							<% property.requests.forEach(function(request){ %>
 							<tr>
-								<td>
+								<td class="request-status">
 									<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
 										<%= request.status %>
 									</a>
 								</td>
-								<td>
+								<td class="request-date">
 									<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
-										<%= request.date_started %> : <%= request.issue_title %>
+										<%= request.date_started %>
+									</a>
+								</td>
+								<td class="request-title">
+									<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
+										<%= request.issue_title %>
 									</a>
 								</td>
 							</tr>
 							<% })%>
 						</table>
-						<a class="btn btn-secondary" href="/tenant/home/<%= uid %>/newrequest/<%= property.id %>"> Add New Request </a>
+						<a class="btn btn-outline-success btn-lg dark mt-5" href="/tenant/home/<%= uid %>/newrequest/<%= property.id %>"> Add New Request </a>
 					</div>
 					<div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
 						<table class="table">
@@ -67,19 +76,19 @@
 							</tr>	
 							<% property.payments.forEach(function(payment){ %>
 							<tr>
-								<td>
-									<%= (payment.date).toDateString() %>
+								<td class="payment-date">
+									<%= payment.date %>
 								</td>
-								<td>
+								<td class="payment-amount">
 									<%= payment.amount %>
 								</td>
-								<td>
+								<td class="payment-method">
 									<%= payment.method %>
 								</td>
 							</tr>
 							<% })%>
 						</table>
-						<a class="btn btn-secondary" href="/tenant/home/<%= uid %>/newpayment/<%= property.id %>"> Add New Payment</a>
+						<a class="btn btn-outline-success btn-lg dark mt-5" href="/tenant/home/<%= uid %>/newpayment/<%= property.id %>"> Add New Payment</a>
 					</div>
 				</div>
 				<hr class="featurette-divider" />

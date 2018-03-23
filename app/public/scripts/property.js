@@ -30,7 +30,12 @@
 			property.id = x;
 		}
 
-		$.post('/api/property/',{property: JSON.stringify(property)})
+		$.ajax({
+			url: '/api/updateproperty/',
+			type: 'POST',
+        	enctype: 'multipart/form-data',
+        	data: property
+        })
 		.then(r => {
 			window.location.href = r;
 		});

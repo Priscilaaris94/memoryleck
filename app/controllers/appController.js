@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-var path = require('path');
+const path = require('path');
 
 // Middleware
 // =============================================================
@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 // ORM / DB Connection
 // =============================================================
 const connection = require("../config/connection");
-const ORM = require("../models/orm");
+const ORM = require("../config/orm");
 const orm = new ORM(connection);
 
 // Main Pages
@@ -40,7 +40,7 @@ router.get('/property/:id', function(req, res){
 // =============================================================
 
 router.get('/landlord/login', function(req, res){
-    res.render('pages/login', {title: 'Landlord Login', buttonid: 'login-landlord'});
+    res.render('pages/login', {title: 'Landlord', buttonid: 'login-landlord'});
 });
 
 router.get('/landlord/home/:uid', function(req, res){
@@ -85,7 +85,7 @@ router.get('/landlord/home/', function(req, res){
 // =============================================================
 
 router.get('/tenant/login', function(req, res){
-    res.render('pages/login', {title: 'Tenant Login', buttonid: 'login-tenant'});
+    res.render('pages/login', {title: 'Tenant', buttonid: 'login-tenant'});
 });
 
 router.get('/tenant/home/:uid', function(req, res){

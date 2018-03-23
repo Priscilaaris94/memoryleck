@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.container {
+	margin: 0 auto;
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+.btn-outline-success {
+	color: #ffffff;
+}
+
+.btn{
+	color: #629920;
+}
+
+.btn.btn-outline-success.dark{
+	background-color: #153F66;
+}
+
+
+.mw-100 img{
+	margin-top: -32px;
+	z-index: -4; 
+}

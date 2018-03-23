@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Memory Leak</title>
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Custom styles for this template -->
+<link href="../../public/assets/css/myprops.css" rel="stylesheet">
+<link href="../../public/assets/css/allprops.css" rel="stylesheet">
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg" style="background-color: #153F66;"> <a class="navbar-brand" href="#">My Properties</a> <a class="navbar-brand" href="#">Payments</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="">
+          <button type="button" class="btn btn-outline-success btn-md btn-group mr-2">+ Add Property</button>
+        </li>
+        <li class="">
+          <button type="button" class="btn btn btn-outline-success btn-md">Login Out</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center caption"><span class="tenant">Your</span><span span class="pros">Property</span></h1>
+    <p class="lead text-center">Make payments or Request Maintenance.</p>
+  </div>
+</div>
+
+<!-- container -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5 tenant_props">
+      <h3>321 Peachtree Street <br >
+        Atlanta, GA 30303</h3>
+      <p>Occupied by: Jane Doe <br >
+        janedoe@gmail.com</p>
+      <p>Last paid: 12/12/12 (20 days ago)</p>
+      <div class="Edit">
+        <ul class="navbar-nav ml-auto">
+          <li class="">
+            <button type="button" class="btn btn-secondary btn-md btn-group mr-2">Add Property</button>
+          </li>
+          <li class="">
+            <button type="button" class="btn btn-secondary btn-md">Add Maintenance Req</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"> 
+            <!-- Nav tabs -->
+            <nav class="mytabs">
+              <div class="nav nav-tabs" id="nav-tab" role="tablist"> <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Maintenance Requests</a> <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Payments</a> </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <ul class="list-group">
+                  <li class="list-group-item text-center">Maintenance Requests</li>
+                  <li class="list-group-item">12/12/12 Open - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</li>
+                  <li class="list-group-item">12/12/12 Open - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</li>
+                  <li class="list-group-item">12/12/12 Open - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitationc</li>
+                </ul>
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <li class="list-group-item text-center">My Payments</li>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1200</td>
+                      <td>12/12/12 (45 days ago)</td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td>12/12/12 (45 days ago)</td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td>12/12/12 (45 days ago)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row --> 
+</div>
+<!-- /.container --> 
+
+<!-- Footer -->
+    <footer class="footer col-sm-12">
+        <div class="container">
+			<p class="float-right text-muted"><a href="#" class="text-muted">Back to top</a></p>
+            <p><span class="float-left text-muted">&copy;2018 Memory Leak Team Project</span></p>
+        </div>
+    </footer>
+
+<!-- Bootstrap core JavaScript
+    ================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

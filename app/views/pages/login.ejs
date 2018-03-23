@@ -1,14 +1,22 @@
 <html>
 <head>
-  <title><%= title %></title>
+  <title><%= title %> Login</title>
   <% include ../partials/head %>
-  <link href="../../public/assets/css/prop.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
 </head>
 <body>
   <% include ../partials/nav %>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <button type="button" id="<%= buttonid %>" class="btn btn-secondary btn-md">Login with google</button>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-center caption">
+        <span class="tenant"><%= title %></span><span span class="pros">Login</span>
+      </h1>
+      <p class="lead text-center">Track payments and maintenance requests for your home.</p>
+    </div>
+  </div>
+  <div class="row px-1">
+    <div class="col-md-12 text-center h-50 d-flex align-items-center justify-content-center">
+      <button type="button" id="<%= buttonid %>" class="btn btn-outline-success btn-lg dark">Login with Google</button>
     </div>
   </div>
   <% include ../partials/footer %>
