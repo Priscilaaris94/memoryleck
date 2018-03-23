@@ -148,7 +148,6 @@ let orm = function(connection){
     LEFT OUTER JOIN payment 
     ON property.id = payment.property_id
     WHERE property.landlord_id = ?
-    AND property.tenant_id = payment.tenant_id
     ;
     SELECT request.*
     FROM property
