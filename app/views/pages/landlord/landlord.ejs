@@ -3,6 +3,7 @@
 	<title><%= title %></title>
 	<% include ../../partials/head %>
 	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+	<script src="/scripts/dashboard.js"></script>
 </head>
 <body>
 	<% include landlord-nav %>
@@ -80,6 +81,7 @@
 											</tr>	
 											<% property.payments.forEach(function(payment){ %>
 											<tr>
+<<<<<<< HEAD
 												<td>
 													<%= payment.date %>
 												</td>
@@ -87,6 +89,15 @@
 													<%= payment.amount %>
 												</td>
 												<td>
+=======
+												<td class="payment-date">
+													<%= payment.date %>
+												</td>
+												<td class="payment-amount">
+													<%= payment.amount %>
+												</td>
+												<td class="payment-method">
+>>>>>>> katherine
 													<%= payment.method %>
 												</td>
 											</tr>
