@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../../partials/head %>
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+</head>
+<body>
+	<% include landlord-nav %>
+	<div class ="jumbotron">
+		<div class="container">
+			<h1 class="display-4 text-center caption"><span class="tenant">Your</span><span span class="pros">Properties</span></h1>
+			<p class="lead text-center">Review payment and maintenance request activity.</p>
+		</div>
+	</div>
+	<div class="container">
+		<br>
+		<% properties.forEach(function(property){ %>
+		<div class="row mb-2">
+			<div class="col-sm-5 tenant_props">
+				<h3><%= property.address_one %> <%= property.address_two %><br>
+					<%= property.city %>, <%= property.state %> <%= property.zip %>
+				</h3>
+				<p>Status: <%= property.status %><br>
+					Beds: <%= property.beds %><br>
+					Baths: <%= property.baths %><br>
+					SqFeet: <%= property.sqfeet %><br>
+					Monthly Rent: <%= property.price %></p>
+					<div class="Edit">
+						<a class="btn btn-secondary" href="/landlord/home/<%= uid %>/property/<%= property.id %>">Edit</a>
+						<a class="btn btn-secondary" href="/landlord/home/<%= uid %>/newrequest/<%= property.id %>">New Request</a>
+					</div>
+				</div><!--col-sm-5-->
+				<div class="col-sm-7">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" id="dashTabs" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="request-tab-<%= property.id %>" data-toggle="tab" href="#request-<%= property.id %>" role="tab" aria-controls="request" aria-selected="true">Maintenance Requests</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="payment-tab-<%= property.id %>" data-toggle="tab" href="#payment-<%= property.id %>" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
+									</li>
+								</ul>
+								<div class="tab-content" id="dashTabContent">
+									<div class="tab-pane fade show active" id="request-<%= property.id %>" role="tabpanel" aria-labelledby="request-tab-<%= property.id %>">
+										<table class="table">
+											<tr>
+												<th>Status</th>
+												<th>Date Started</th>
+												<th>Request Title</th>
+											</tr>	
+											<% property.requests.forEach(function(request){ %>
+											<tr>
+												<td class="request-status">
+													<a href="/landlord/home/<%= uid %>/request/<%= request.id %>">
+														<%= request.status %>
+													</a>
+												</td>
+												<td class="request-date">
+													<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
+														<%= request.date_started %>
+													</a>
+												</td>
+												<td class="request-title">
+													<a href="/tenant/home/<%= uid %>/request/<%= request.id %>">
+														<%= request.issue_title %>
+													</a>
+												</td>
+											</tr>
+											<% })%>
+										</table>
+									</div>
+									<div class="tab-pane fade" id="payment-<%= property.id %>" role="tabpanel" aria-labelledby="payment-tab-<%= property.id %>">
+										<table class="table">
+											<tr>
+												<th>Date</th>
+												<th>Amount</th>
+												<th>Method</th>
+											</tr>	
+											<% property.payments.forEach(function(payment){ %>
+											<tr>
+												<td>
+													<%= payment.date %>
+												</td>
+												<td>
+													<%= payment.amount %>
+												</td>
+												<td>
+													<%= payment.method %>
+												</td>
+											</tr>
+											<% })%>
+										</table>
+									</div>
+								</div><!-- tab-content -->
+							</div>
+						</div>
+					</div>
+				</div><!--col-sm-7-->
+			</div><!--row-->
+			<hr class="featurette-divider" />
+			<% })%>
+		</div><!--container-->
+	</body>
+	</html>

@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../../partials/head %>
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+</head>
+<body>
+	<% include tenant-nav %>
+	<div class="jumbotron d-flex justify-content-between">
+		<div>
+			<h1 class="display-4 caption">
+				<span class="tenant"><%= title %></span>
+			</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<form data-id="<%= request.id %>" data-uid="<%= uid %>" data-property="<%= request.property_id %>" data-user="tenant">
+					
+					<% include ../../partials/request-fields %>
+
+					<div class="d-flex align-items-center">
+						<button class="btn btn-outline-success btn-lg dark" type="submit"><%= title %></button>
+						<a class="mx-5" href="/tenant/home/<%= uid %>">Cancel</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="/scripts/request.js"></script>
+</body>
+</html>

@@ -1,65 +1,39 @@
-//Dependencies
-
+// Dependencies
 var express = require("express");
-
 var bodyParser = require("body-parser");
 
-
-
-//Define port the server will be listening on.
-
+// Define port the server will be listening on.
 var PORT = process.env.PORT || 3000;
-
-
-
 var app = express();
 
+// Middleware
+// =============================================================
 
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static(__dirname + '/app/public'));
 
-//Serve static content for the app from the "public" directory in the application directory.
-
-app.use(express.static(__dirname + '/public'));
-
-
-
-//Parse application/x-www-form-urlencoded
-
+// Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
-
-//Parse application/json
-
 app.use(bodyParser.json());
 
+var path = require('path');
+app.set('views', path.join(__dirname, 'app', 'views'));
+app.set('view engine', 'ejs');
 
 
-//Set Handlebars.
-
-var exphbs = require("express-handlebars");
-
-
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-
-app.set("view engine", "handlebars");
-
-
+// Controller Routes
+// =============================================================
 
 // Import routes and give the server access to them.
 
-var routes = require("./controllers/appController.js");
+var api = require('./app/controllers/apiController');
+app.use('/api', api);
 
-
-
-app.use(routes);
-
-
+var routes = require("./app/controllers/appController.js");
+app.use('/', routes);
 
 //App is listening...
 
 app.listen(PORT, function() {
-
   console.log("App now listening at localhost:" + PORT);
-
 });

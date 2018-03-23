@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../partials/head %>
+	<link rel="stylesheet" type="text/css" href="/assets/css/prop.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/allprops.css">
+</head>
+<body>
+	<% include ../partials/nav %>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4 text-center caption">
+				<span class="tenant"><%= property.city %></span> <span span class="pros">Home</span>
+			</h1>
+			<p class="lead text-center">This could be your new home.</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<!-- Image  -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="mw-100"><img src="<%= property.img_1 %>" alt="triple images" /></div>
+			</div>
+		</div>
+		<br>
+
+		<!-- Address -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row featurette">
+					<div class="col-md-12 d-flex justify-content-between">
+						<h2 class="featurette-heading w-50">
+							<%= property.address_one %>, <%= property.address_two %><br>
+							<span class="city"><%= property.city %>, <%= property.state %> <%= property.zip %></span>
+						</h2>
+						<p class="lead w-50">
+							Beds: <%= property.beds %><br>
+							Baths: <%= property.baths %><br>
+							SqFeet: <%= property.sqfeet %><br>
+							Monthly Rent: <%= property.price %>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Claim This Home --> 
+		<br>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<button type="button" class="btn btn-outline-success btn-lg dark" id="claim-prop" data-id="<%= property.id %>">Claim This Home</button>
+			</div>
+			<div class="col-md-12 text-center mt-3">
+				<a class="text-muted" href="/">Go Back to Keep Searching</a>
+			</div>  
+		</div>
+	</div>
+
+	<% include ../partials/footer %>
+</body>
+</html>

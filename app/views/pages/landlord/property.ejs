@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title><%= title %></title>
+	<% include ../../partials/head %>
+	<link type="text/css" rel="stylesheet" href="/assets/css/prop.css">
+</head>
+<body>
+	<% include landlord-nav %>
+	<div class="jumbotron">
+		<h1><%= title %></h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<form class="form" enctype="multipart/form-data" data-id="<%= property.id %>" data-uid="<%= uid %>">
+
+					<% include ../../partials/property-fields %>
+
+					<button class="btn btn-outline-success btn-lg dark mt-5" type="submit"><%= title %></button>
+					<a href="/landlord/home/<%= uid %>">Cancel</a>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="/scripts/property.js"></script>
+</body>
+</html>

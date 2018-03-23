@@ -1,0 +1,36 @@
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Issue Title</label>
+		<input type="text" name="issue_title" value="<%= request.issue_title %>">
+	</div>
+	<div class="form-group col-md-6">
+		<label>Date Started</label>
+		<input type="date" name="date_started" value="<%= request.date_started %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Contact Name</label>
+		<input type="text" name="contact_name" value="<%= request.contact_name %>">
+	</div>
+	<div class="form-group col-md-6">
+		<label>Contact Phone</label>
+		<input type="number" min="1111111111" max="9999999999" name="contact_phone" value="<%= request.contact_phone %>">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Status</label>
+		<select name="status">
+			<option value="open" <% if (request.status == 'open') {%>selected<%} %>>open</option>
+			<option value="in progress" <% if (request.status == 'in progress') {%>selected<%} %>>in progress</option>
+			<option value="closed" <% if (request.status == 'closed') {%>selected<%} %>>closed</option>
+		</select>
+	</div>
+	<div class="form-group col-md-6">
+		<label>Issue Description</label>
+		<textarea name="issue_desc" rows="5" cols="60">
+			<%= request.issue_desc %>
+		</textarea>
+	</div>
+</div>
