@@ -48,7 +48,8 @@ $(document).ready(function(){
         },
         property = {
           id: event.currentTarget.attributes['data-id'].value,
-          tenant_id: result.user.uid
+          tenant_id: result.user.uid,
+          status: 'occupied'
         }
         $.post('/api/user', user)
         .then(r =>{

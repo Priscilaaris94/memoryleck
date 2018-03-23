@@ -132,3 +132,12 @@ html {
 	font-size: 12px;
 }
 
+/* Fields */
+label{
+	display: block;
+	width: 100%;
+}
+
+input, select, option, textarea{
+	width: 100%;
+}
