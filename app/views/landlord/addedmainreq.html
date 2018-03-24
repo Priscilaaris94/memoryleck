@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
 <head>
-	<title>Add a New Payment</title>
-	<meta charset="UTF-8">
+<title>Add a New Request</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,16 +13,15 @@
 <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 	
 <!-- ADDED SCRIPT -->
-<link href="https://fonts.googleapis.com/css?family=Anton|Poiret+One" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:700|Rajdhani:300" rel="stylesheet">
-	
-<script src="/scripts/auth.js"></script>	
+<script src="/scripts/auth.js"></script>
 
 <!-- CUSTOM STYLES -->
-<link rel="stylesheet" type="text/css" href="../../public/assets/css/payments.css">
+<link href="https://fonts.googleapis.com/css?family=Anton|Poiret+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:700|Rajdhani:300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../../public/assets/css/tenant_admin.css">
 </head>
-	
 <body>
+	
 <!-- START NAV -->	
 <nav class="navbar navbar-expand-lg" style="background-color: #153F66;"><a class="navbar-brand" href="">Home</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -31,50 +30,72 @@
       </ul>
     </div>
  </nav>
+	
 
 <!-- JUMBOTRON -->
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4 text-center caption"> <span class="header_text">Make</span><span class="sub_header_text">Payment</span> </h1>
+    <h1 class="display-4 text-center caption"> <span class="header_text">Landlord</span><span class="sub_header_text">Login</span> </h1>
     <p class="lead text-center">Track payments and maintenance requests for your home.</p>
   </div>
 </div>
+	
 	
 <!-- FORM -->
 <div class="container form_outline">
 <div class ="row">
    <div class="col-md-12">
-     <h1 class="listing_text">Payments</h1>
+     <h1 class="listing_text">My Request</h1>
    </div>	
 </div>
-
-<div class="row">
-<div class="col-12">
-<form data-id="" data-uid="FrvOxTPdylUgBDGEZOiyev458gh1" data-property="4">
-<label>Date</label>
-<input type="date" name="date" value="">
-<label>Amount</label>
-<input type="number" name="amount" value="">
-<label>Method</label>
-<select name="method">
-	<option value="Credit Card" >Credit Card</option>
-	<option value="Check" >Check</option>
-	<option value="Paypal">Paypal</option>
-</select>
-</form>
-	</div></div>
-	
-	
-<div class="row">
-<div class="col-12">	
+<hr class="featurette-divider" />	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+<form data-id="" data-uid="FrvOxTPdylUgBDGEZOiyev458gh1" data-property="4" data-user="tenant">
+	<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Issue Title</label>
+		<input type="text" name="issue_title" value="">
+	</div>
+	<div class="form-group col-md-6">
+		<label>Date Started</label>
+		<input type="date" name="date_started" value="">
+	</div>
+	</div></form>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Contact Name</label>
+		<input type="text" name="contact_name" value="">
+	</div>
+	<div class="form-group col-md-6">
+		<label>Contact Phone</label>
+		<input type="number" min="1111111111" max="9999999999" name="contact_phone" value="">
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label>Status</label>
+		<select name="status">
+			<option value="open" >open</option>
+			<option value="in progress" >in progress</option>
+			<option value="closed" >closed</option>
+		</select>
+	</div>
+	<div class="form-group col-md-6">
+		<label>Issue Description</label>
+		<textarea name="issue_desc" rows="5" cols="60"></textarea>
+	</div>
+</div>
+</div>
 <div class="d-flex align-items-center">
-<button class="btn btn-outline-success btn-lg dark" type="submit">Add a New Payment</button>
-<a class="mx-5 btn btn-outline-success btn-lg dark" href="/tenant/home/FrvOxTPdylUgBDGEZOiyev458gh1">Cancel</a>
+	<button class="btn btn-outline-success btn-lg dark" type="submit">Add a New Request</button>
+	<a class="btn btn-outline-success btn-lg dark" style="background-color: #153F66;" href="/tenant/home/FrvOxTPdylUgBDGEZOiyev458gh1"><span class="canceled">Cancel</span></a>	
 </div>
-</div>
-</div>
-	</div>	
-	
+	</div>
+		</div>
+	</div>
+		
 <!--FOOTER -->
 <footer class="footer col-sm-12">
   <div class="container">
@@ -88,9 +109,8 @@
 <script src="../../../../assets/js/vendor/pper.min.js"></script> 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	
-<script src="/scripts/payment.js"></script>
-	
+<script src="/scripts/request.js"></script>
 </body>
 </html>

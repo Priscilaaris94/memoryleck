@@ -7,7 +7,7 @@ body {
 
 /* NAVBAR */	
 navbar {
-	z-index: 5;
+	z-index: 100;
 }
 a {
 	margin-left: 50px;
@@ -16,31 +16,44 @@ a {
 .navbar-brand {
 	color: white;
 }
+
 li a {
 	color: white;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:link {
+    color: #ffffff; 
+}
+
+a:visited {
+    color: #629920;
 }
 
 a:hover {
 	color: #629920;
 }
-
-.active {
-	color: none;
+a:active {
+    color: #629920;
 }
+
 /* JUMBOTRON */
 .jumbotron {
-	margin-top: -50px;
+	margin-top: -30px;
 	height: 200px;
-	z-index: 4;
 }
 /* BODY */
-
-.tenant {
-	font-family: 'Oswald', sans-serif;
-	color: #629920;
+.dream {
+	font-family: 'Poiret One', cursive;
+	color: #629920;	
 }
-.pros {
-	font-family: 'Rajdhani', sans-serif;
+.shack {
+	font-family: 'Anton', sans-serif;
+	color: #153F66;
+	font-size: 36px;
 }
 h1.rental_text {
 	font-family: 'Oswald', sans-serif;
@@ -49,9 +62,13 @@ h1.rental_text {
 .btn btn-outline-success {
 	color: white;
 }
-.listing {
+
+/* FEATURES */
+.container.listing {
 	margin-top: -15px;
+	width: 82%;
 	background-color: #E2E2E2;
+	z-index: -4;
 }
 .rental_text {
 	padding-top: 20px;
@@ -63,15 +80,26 @@ h1.rental_text {
 	color: #629920;
 }
 .featurette-image {
-	width: 250px;
-	height: 150px;
+	float: right;
+	width: 300px;
+	height: 200px;
 }
 .featurette {
 	border-bottom-color: 1px #629920;
 }
+
+a.chose_property{
+	color:#629920;
+}
+
+a:hover.chose_property {
+	color: #ffffff;
+}
+
 /* VIDEO */
 .main_video {
 	position: relative;
+	margin: 0 auto;
 	margin-top: -50px;
 	bottom: 0%;
 	left: 0%;

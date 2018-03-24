@@ -1,10 +1,196 @@
 @charset "UTF-8";
 /* CSS Document */
-
-
-.tenant_admin {
-	height: 600px ;
-		
 	
+body {
+	margin: 0 auto;
+}
+
+/*BODY */
+.header_text {
+	color: #629920;	
+}
+.sub_header_text {
+	color: #153F66;
+}
+
+h1.listing_text {
+	font-family: 'Oswald', sans-serif;
+	color: #629920;
+}
+.btn btn-outline-success {
+	color: white;
+}
+/* NAVBAR */	
+navbar {
+	z-index: 100;
+}
+a {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+.navbar-brand {
+	color: white;
+}
+
+li a {
+	color: white;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:link {
+    color: #ffffff; 
+}
+
+a:visited {
+    color: #629920;
+}
+
+a:hover {
+	color: #629920;
+}
+a:active {
+    color: #629920;
+}
+
+/* JUMBOTRON */
+.jumbotron {
+	margin-top: -30px;
+	height: 200px;
+}
+
+
+/* FEATURES */
+.container.listing {
+	margin-top: -15px;
+	width: 82%;
+	background-color: #E2E2E2;
+	z-index: -4;
+}
+listing_text {
+	padding-top: 20px;
+}
+.featurette-heading {
+	color: #153F66;
+}
+.city {
+	color: #629920;
+}
+
+.featurette {
+	border-bottom-color: 1px #629920;
+}
+
+a.chose_property{
+	color:#629920;
+}
+
+a:hover.chose_property {
+	color: #ffffff;
+}
+
+/* FORM */
+
+.form_outline {
+	width: 80%;
+}
+.title_prop {
+	background-color: #629920;
+	color: #ffffff;
+	width: 100%;
+	height: 40px;
+}
+h3 {
+ margin: 5px 0 0 20px;
+ font-size: 18px;
+}
+.container.form_outline {
+	margin-top: 20px;
+	border: solid 1px #629920;
+}
+label {
+	font-size: 12px;
+}
+.form-control {
+	font-size: 12px;
+}
+
+a .canceled {
+	color: #ffffff;
+}
+
+.d-flex {
+	padding-bottom: 20px;
+}
+
+/* NAVBAR */	
+navbar {
+	z-index: 5;
+}
+.navbar-brand {
+	color: white;
+}
+
+.navbar-nav > .nav-link {
+	margin-left: 50px;
+	margin-right: 50px;
+	color: white;
+}
+a{
+	color: #153F66;
+}
+
+a:hover, 
+.navbar-nav > .nav-link:hover {
+	color: #629920;
+}
+
+.active {
+	color: inherit;
+}
+
+.moment-count{
+	color: #bcbcbc;
+	font-style: italic;
+}
+
+/* Fields */
+label{
+	display: block;
+	width: 100%;
+}
+
+input, select, option, textarea{
+	width: 100%;
+}
+
+/* FOOTER */
+html {
+	position: relative;
+	min-height: 100%;
+}
+/* Margin bottom by footer height */
+body {
+	margin-bottom: 85px;
+}
+.tag {
+	color: #ffffff;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 40px; /* Set the fixed height of the footer here */
+	line-height: 10px; /* Vertically center the text there */
+	color: #f8f7fd;
+	background-color: #1F1F1F;
+	text-align: center;
+	z-index: 100;
+}
+ p .text-muted  {
+	font-size: 12px;
 }
 

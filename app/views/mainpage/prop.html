@@ -1,71 +1,86 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>Memory Leak</title>
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- Custom styles for this template -->
-<link href="../../public/assets/css/prop.css" rel="stylesheet">
-<link href="../../public/assets/css/allprops.css" rel="stylesheet">
-</head>
+	<title>Property 1569 Van Vleck Ave SE</title>
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+<script src="/scripts/auth.js"></script>
+
+<!-- CUSTOM STYLES -->
+<link href="https://fonts.googleapis.com/css?family=Anton|Poiret+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:700|Rajdhani:300" rel="stylesheet">
+<link href="../../public/assets/css/prop.css" rel="stylesheet">
+<link href="../../public/assets/css/prop.css" rel="stylesheet">
+</head>
 <body>
-<header>
-  <nav class="navbar navbar-expand-lg" style="background-color: #153F66;"><a class="navbar-brand" href="">Home<span class="sr-only">(current)</span></a>
+	
+<!-- START NAV -->	
+<nav class="navbar navbar-expand-lg" style="background-color: #153F66;"><a class="navbar-brand" href="">Home<span class="sr-only">(current)</span></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li><a class="nav-link btn btn-outline-success" href="#">Landlord Login</a></li>
         <li><a class="nav-link btn btn-outline-success" href="#">Tenant Login</a></li>
       </ul>
     </div>
-  </nav>
-</header>
+ </nav>
+	
+<!-- JUMBOTRON -->
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4 text-center caption"><span class="tenant">TENANT</span><span span class="pros">PROS</span></h1>
-    <p class="lead text-center">Here is your home.</p>
+    <h1 class="display-4 text-center caption"><span class="header_text">Atlanta</span><span class="sub_header_text">Home</span> </h1>
+    <p class="lead text-center">This could be your new home.</p>
   </div>
 </div>
-
-<!-- Start Image BOX -->
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="mw-100"><img src="../../public/assets/img/g8.jpg" alt="triple images" /></div>
-    </div>
-  </div>
-  <!-- /.Image --> 
-  <br >
-  <!-- /.Address -->
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">321 Peachtree Street</h2>
-          <h2><span class="city">Atlanta, GA 30303</span></h2>
-          <p class="lead">Bed: 2 Baths: 1 SqFeet 860 Monthly Rent: 1200</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Start Claim This Home Button --> 
-  <br >
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <button type="button" class="btn btn-outline-success btn-lg" style="background-color: #153F66;">Claim This Home</button>
-    </div>  
-  </div>
-  
-  <!-- /.Claim This Home Button -->   
+	
+<!-- IMAGE  -->	
+<div class="container">		
+<div class="row">
+<div class="col-md-12 text-center">
+  <div class="mw-100"><img src="../../public/assets/img/imageedit_76_2039434984.jpg" alt="triple images" /></div>
 </div>
-<!-- /.container --> 
-
-<!-- Footer -->
+</div>
+	
+<!-- ADDRESS -->		
+<!-- START THE FEATURES -->
+<div class ="row">
+   <div class="col-md-12 text-center">
+     <h1 class="listing_text">Your Listing</h1>
+   </div>
+</div>	
+<div class="row">	 
+<div class="col-md-12 text-center">
+	<hr class="featurette-divider" />
+ <div class="row featurette">
+ <div class="col-md-12">
+  <h2 class="featurette-heading">1569 Van Vleck Ave SE</h2>
+  <h2><span class="city">Atlanta, GA 30302.</span></h2>
+ <p class="lead">Bed: 2 Baths: 1 SqFeet 860 Monthly Rent: 1200</p>	
+	 <hr class="featurette-divider" />
+</div>		
+</div>        
+</div>
+</div> 
+<!-- END THE FEATURETTES --> 		
+		
+<!--CLAIM THIS HOUSE --> 
+<div class="row">
+<div class="col-md-12 text-center">
+<button type="button" class="btn btn-outline-success btn-lg dark claim" style="background-color: #153F66;" id="claim-prop" data-id="11">Claim This Home</button>
+</div>
+ <div class="col-md-12 text-center mt-3">
+	<a class="text-muted" href="/">Go Back to Keep Searching</a>
+</div>  
+</div>
+</div>
+	
+<!--FOOTER -->
 <footer class="footer col-sm-12">
   <div class="container">
     <p class="float-right text-muted"><a href="#" class="text-muted">Back to top</a></p>
@@ -75,8 +90,7 @@
 
 <!-- Bootstrap core JavaScript
     ================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-
+<script src="../../../../assets/js/vendor/pper.min.js"></script> 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

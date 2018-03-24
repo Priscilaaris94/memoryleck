@@ -1,58 +1,56 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>Memory Leak</title>
-<!-- Bootstrap core CSS -->
+<title>Landlord Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- Custom styles for this template -->
-<link href="../../public/assets/css/prop.css" rel="stylesheet">
+
+<!-- ADDED SCRIPT -->
+<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+<script src="/scripts/auth.js"></script>
+
+<!-- CUSTOM STYLES -->
+<link href="https://fonts.googleapis.com/css?family=Anton|Poiret+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:700|Rajdhani:300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../../public/assets/css/landlord.css">
 </head>
+
 <body>
-<header>
 
-<nav class="navbar navbar-expand-sm bg-dark"><a class="navbar-brand" href="allprops.html">Home<span class="sr-only">(current)</span></a>
-   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="">
-        <a class="nav-link" href="#">Landlord Login </a>
-      </li>
-      <li class="">
-        <a class="nav-link" href="#">Tenant Login</a>
-      </li>
-    </ul>
-  </div>
+<!-- START NAV -->
+<nav class="navbar navbar-expand-lg" style="background-color: #153F66;"><a class="navbar-brand" href="">Go Back</a>
 </nav>
-	<br >	
-</header>	
 
-
-	
-<!-- Start Claim This Home Button -->
-<br >	
-
-<div class="row">
-<div class="col-md-12 text-center">	
-	<button type="button" class="btn btn-secondary btn-md">Login with google</button>
-</div>
+<!-- JUMBOTRON -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center caption"> <span class="header_text">Landlord</span><span class="sub_header_text">Login</span> </h1>
+    <p class="lead text-center">Track payments and maintenance requests for your home.</p>
+  </div>
 </div>
 
-<!-- /.container --> 
+<!-- GOOGLE BUTTON-->
+<div class="row px-1">
+  <div class="col-md-12 text-center h-50 d-flex align-items-center justify-content-center">
+    <button type="button" id="login-landlord" class="btn btn-outline-success btn-lg dark">Login with Google</button>
+  </div>
+</div>
 
-<!-- FOOTER -->
-<footer class="container">
-  <p class="float-right"><a href="#">Back to top</a></p>
-  <p>&copy;2018 Memory Leak Team Project </p>
+<!--FOOTER -->
+<footer class="footer col-sm-12">
+  <div class="container">
+    <p class="float-right text-muted"><a href="#" class="text-muted">Back to top</a></p>
+    <p><span class="float-left text-muted">&copy;2018 Memory Leak Team Project</span></p>
+  </div>
 </footer>
 
 <!-- Bootstrap core JavaScript
     ================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-
+<script src="../../../../assets/js/vendor/pper.min.js"></script> 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -1,116 +1,190 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>Memory Leak</title>
-<!-- Bootstrap core CSS -->
+<title>All Properties</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- Custom styles for this template -->
-<link href="https://fonts.googleapis.com/css?family=Oswald:700|Rajdhani:300" rel="stylesheet">	
-<link href="../../public/assets/css/allprops.css" rel="stylesheet">
+
+<!-- ADDED SCRIPT -->
+<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+<script src="/scripts/auth.js"></script>
+
+<!-- CUSTOM STYLES -->
+<link href="https://fonts.googleapis.com/css?family=Anton|Poiret+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:700|Rajdhani:300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../../public/assets/css/allprops.css">
+	
+<script src="/scripts/search.js"></script>
 </head>
 
 <body>
-<header>
-  <nav class="navbar navbar-expand-lg" style="background-color: #153F66;"><a class="navbar-brand" href="">Home<span class="sr-only">(current)</span></a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="login"> <a class="nav-link" href="#">Landlord Login </a> </li>
-        <li class="login"> <a class="nav-link" href="#">Tenant Login</a> </li>
-      </ul>
-    </div>
-  </nav>
-</header>
-	
+
+<!-- START NAV -->
+<nav class="navbar navbar-expand-lg" style="background-color: #153F66;"><a class="navbar-brand" href="">Home</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-nav ml-auto"> <a href="/landlord/login">Landlord Login </a> <a href="/tenant/login">Tenant Login</a> </div>
+  </div>
+</nav>
+
+<!-- JUMBOTRON -->
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-	  <h1 class="display-4 text-center caption"><span class="tenant">TENANT</span><span span class="pros">PROS</span></h1>
-    <p class="lead text-center">Professional app to help you be a good tenant and take care of your tenants.</p>
+    <h1 class="display-4 text-center caption"><span class="dream">DREAM</span><span span class="shack">SHACK</span></h1>
+    <p class="lead text-center">Your next home is a scroll, click and payment away.</p>
   </div>
-</div>	
-	
-<!-- video -->		
+</div>
+
+<!-- START VIDEO -->
 <div class="container">
-<div class ="row main_video">
-  <div class="col-12">
-    <div class="homepage-hero-module">
-      <div class="video-container">
-        <div class="filter">
-          <video autoplay loop class="fillWidth">
-            <source src="../../public/assets/img/Urban-Timer.mp4" type="video/mp4" />
-            Your browser does not support the video tag. I suggest you upgrade your browser.
-            <source src="../../public/assets/img/Urban-Timer.webm" type="video/webm" />
-            Your browser does not support the video tag. I suggest you upgrade your browser. </video>
+  <div class ="row main_video">
+    <div class="col-12">
+      <div class="homepage-hero-module">
+        <div class="video-container">
+          <div class="filter">
+            <video autoplay loop class="fillWidth">
+              <source src="../../public/assets/img/Urban-Timer.mp4" type="video/mp4" />
+              Your browser does not support the video tag. I suggest you upgrade your browser.
+              <source src="../../public/assets/img/Urban-Timer.webm" type="video/webm" />
+              Your browser does not support the video tag. I suggest you upgrade your browser. </video>
+            <!--
           <div class="poster hidden"> 
-<!--<img src="../../public/assets/img/Urban-Timer.jpg" alt=""> -->
+<img src="../../public/assets/img/Urban-Timer.jpg" alt=""> 
+          </div>
+--> 
           </div>
         </div>
       </div>
     </div>
   </div>
-	</div>
-<br >
-<!-- /.video --> 
+  <!-- END VIDEO --> 
+  
+  <!-- START THE FEATURES -->
+  <div class="container">
+    <div class ="row">
+      <div class="col-12">
+        <h1 class="rental_text">Available Properties</h1>
+        <br>
+        <form class="form-inline mt-2 mt-md-0">
+          <input id="search-prop-field" class="form-control mr-sm-2 w-50" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+    <br >
+    <div class="row">
+      <div class="col-12" id="search-results">
+        <hr class="featurette-divider" />
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">118 Peachtree Srteet</h2>
+            <h2><span class="city">Atlanta, GA 30302.</span></h2>
+            <p class="lead">Bed: 2 Baths: 1 SqFeet 860 Monthly Rent: 1200</p>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="text">
+            <a href="/property/2" class="chose_property">click here</a>
+            </button>
+          </div>
+          <div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" src="../../public/assets/img/g11.jpg" alt="pic" /> </div>
+        </div>
+        <hr class="featurette-divider" />
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">824 Peachtree Srteet</h2>
+            <h2><span class="city">Atlanta, GA 30302.</span></h2>
+            <p class="lead">Bed: 2 Baths: 1 SqFeet 1030 Monthly Rent: 1200</p>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="text">
+            <a href="/property/3" class="chose_property">click here</a>
+            </button>
+          </div>
+          <div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" src="../../public/assets/img/imageedit_76_2039434984.jpg" alt="pic" /> </div>
+        </div>
+        <hr class="featurette-divider" />
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading"> 500 Bishop St NW <br>
+              <span class="text-muted">Atlanta, GA 30301</span> </h2>
+            <p class="lead"> Beds: 2
+              Baths: 2
+              SqFeet: 720 <br>
+              Monthly Rent: 1100<br>
+            </p>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="text">
+            <a href="/property/9" class="chose_property">click here</a>
+            </button>
+          </div>
+          <div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" src="../../public/assets/img/imageedit_19_2193240083.jpg" alt="pic" /> </div>
+        </div>
+        <hr class="featurette-divider" />
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading"> 654 Hillside Drive <br>
+              <span class="text-muted">Atlanta, GA 30099</span> </h2>
+            <p class="lead"> Beds: 2
+              Baths: 1
+              SqFeet: 860 <br>
+              Monthly Rent: 1200<br>
+            </p>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="text">
+            <a href="/property/10" class="chose_property">click here</a>
+            </button>
+          </div>
+          <div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" src="../../public/assets/img/g4.jpg" alt="pic" /> </div>
+        </div>
+        <hr class="featurette-divider" />
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading"> 1569 Van Vleck Ave SE <br>
+              <span class="text-muted">Atlanta, GA 30313</span> </h2>
+            <p class="lead"> Beds: 1
+              Baths: 2
+              SqFeet: 1030 <br>
+              Monthly Rent: 1200<br>
+            </p>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="text">
+            <a href="/property/11" class="chose_property">click here</a>
+            </button>
+          </div>
+          <div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" src="../../public/assets/img/g9.jpg" alt="pic" /> </div>
+        </div>
+        <hr class="featurette-divider" />
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading"> 2227 Telhurst St SW <br>
+              <span class="text-muted">Atlanta, GA 30329</span> </h2>
+            <p class="lead"> Beds: 1
+              Baths: 2
+              SqFeet: 680 <br>
+              Monthly Rent: 1000<br>
+            </p>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="text">
+            <a href="/property/12" class="chose_property">click here</a>
+            </button>
+          </div>
+          <div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" src="../../public/assets/img/imageedit_63_5626541227.jpg" alt="pic" /> </div>
+        </div>
+        <hr class="featurette-divider" />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END THE FEATURETTES --> 
 
-<!-- START THE FEATURETTES -->	
-<div class="container listing">
-<div class ="row">
-    <div class="col-12">
-      <h1 class="rental_text">Find Your Next Rental</h1>
-      <br >
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="type here" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #153F66;" type="submit">Search</button>
-	  </form>
-    </div>
+<!--FOOTER -->
+<footer class="footer col-sm-12">
+  <div class="container">
+    <p class="float-right text-muted"><a href="#" class="text-muted">Back to top</a></p>
+    <p><span class="float-left text-muted">&copy;2018 Memory Leak Team Project</span></p>
   </div>
-  <br >
-<hr class="featurette-divider" />
-  <div class="row">
-    <div class="col-8">
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">118 Peachtree Srteet</h2>
-          <h2><span class="city">Atlanta, GA 30302.</span></h2>
-          <p class="lead">Bed: 2 Baths: 1 SqFeet 860 Monthly Rent: 1200</p>
-        </div>
-        <div class="col-md-5"><img class="featurette-image img-fluid mx-auto float-right" src="../../public/assets/img/g5.jpg" alt="Generic image"></div>
-      </div>
-      <hr class="featurette-divider" />
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">824 Peachtree Srteet</h2>
-          <h2><span class="city">Atlanta, GA 30302.</span></h2>
-          <p class="lead">Bed: 2 Baths: 1 SqFeet 1030 Monthly Rent: 1200</p>
-        </div>
-        <div class="col-md-5"><img class="featurette-image img-fluid mx-auto float-right" src="../../public/assets/img/g8.jpg" alt="Generic image"> </div>
-      </div>
-    </div>
-  </div>
-  <!-- /END THE FEATURETTES --> 
-</div>
-</div>
-<!-- /.container --> 
-	
-<!-- Footer -->
-    <footer class="footer col-sm-12">
-        <div class="container">
-			<p class="float-right text-muted"><a href="#" class="text-muted">Back to top</a></p>
-            <p><span class="float-left text-muted">&copy;2018 Memory Leak Team Project</span></p>
-        </div>
-    </footer>	
-	
+</footer>
 
 <!-- Bootstrap core JavaScript
     ================================================== --> 
 <script src="../../../../assets/js/vendor/pper.min.js"></script> 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
