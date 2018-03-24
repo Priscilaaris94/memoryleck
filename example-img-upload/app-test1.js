@@ -1,8 +1,8 @@
 const express = require('express');
 const multer = require('multer');
 const upload = multer({
-  dest: 'uploads/' // this configures multer to save your files into a directory called "uploads"
-}); 
+    dest: 'uploads/' // this configures multer to save your files into a directory called "uploads"
+});
 
 const app = express();
 
@@ -19,7 +19,7 @@ WOULD DO WHATEVER ELSE WE NEED WHEN WE SERVE THAT PAGE
 */
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index-test1.html');  //This just sends the index.html file when the browser loads the root url
+    res.sendFile(__dirname + '/index-test1.html'); //This just sends the index.html file when the browser loads the root url
 });
 
 
@@ -31,39 +31,56 @@ File will be automatically renamed.
 The file name ('file-to-upload') must match the name attribute in your html input element
 */
 
-app.post('/bob', upload.single('file-to-upload'), (req, res) => {
-  //at this point the file is already uploaded to the "uploads" folder
-  //everything else inside this code block is just callback logic for what we want to do after the user submits the image
+app.post('/', upload.single('file-to-upload'), (req, res) => {
+    //at this point the file is already uploaded to the "uploads" folder
+    //everything else inside this code block is just callback logic for what we want to do after the user submits the image
 
-  //we should grab the filename that multer created for this upload, and store the filename and path in the database
-  //see bottom of this code for an example logging of the req.file object
-  var relPathAndFilename = req.file.path;
-  //console.log("req.file.path:", relPathAndFilename); //just logging the relative path to see what it looks like
-  console.log(req.body);
+    //we should grab the path and filename that multer created for this upload, and store the filename and path in the database
+    //see bottom of this code for an example logging of the req.file object and the req.body object
 
-  //in this demo we will just reload the page with a redirect
-  //in the real app, the relPathAndFilename should be stored in the db and associated with a property id
-  res.redirect('/'); //this redirect just reloads the page. We can do whatever we want in response to the upload.
-  
+    var relPathAndFilename = req.file.path;
+
+    console.log("req.body:");
+    console.log(req.body);
+    console.log();
+    console.log("req.file:");
+    console.log(req.file);
+
+    //in this demo we will just reload the page with a redirect
+    //in the real app, the relPathAndFilename should be stored in the db and associated with a property id
+
+    res.redirect('/'); //this redirect just reloads the page. We can do whatever we want in response to the upload.
+
+
 });
 
 
 //Turn on the server app to listen on port 3000
 app.listen(3000);
+console.log("listening on PORT:", 3000);
 
 
 
 
 /*
-Example logging of the req.file object
+Example logging of the req.body and req.file objects
 
+req.body:
+{ 'file-to-upload': 'C:\\fakepath\\pic7.jpg',
+  firstname: 'Gene',
+  lastname: 'Cannella',
+  '': 'Upload',
+  landlord_id: 'bob',
+  id: 'fred' }
+
+req.file:
 { fieldname: 'file-to-upload',
-  originalname: 'pic2.jpg',
+  originalname: 'pic7.jpg',
   encoding: '7bit',
   mimetype: 'image/jpeg',
   destination: 'uploads/',
-  filename: 'da902e0505e597dfc721ad5183114424',
-  path: 'uploads\\da902e0505e597dfc721ad5183114424',
-  size: 408680 }
+  filename: '4872550656011fc3a7297c372d32620d',
+  path: 'uploads\\4872550656011fc3a7297c372d32620d',
+  size: 284638 }
 
 */

@@ -9,17 +9,70 @@
 
 <body>
     <!-- Here is the html input form that provide the folder "browse" capability and the upload submit button -->
-    <form action="/bob" enctype="multipart/form-data" method="post">
-        <input type="file" name="file-to-upload"> 
+    <form action="/" enctype="multipart/form-data" method="post" data-id="fred" data-uid="bob">
+        <input type="file" name="file-to-upload">
+        <br>
         <br> First name:
         <br>
         <input type="text" name="firstname">
+        <br>
         <br> Last name:
         <br>
         <input type="text" name="lastname">
         <br>
+        <br>
         <input type="submit" value="Upload">
     </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+    $('form').on('submit', (event) => {
+        event.preventDefault();
+
+        //here we use jQuery to select the input element where we are choosing the file to upload
+        var fileInputElement = $(event.currentTarget).find('[name="file-to-upload"]');
+        //here we are getting a reference for the actual file data itself
+        var file = fileInputElement[0].files[0];
+
+        //here I am using the FormData API to build the AJAX data instead of the previous approach
+        //of constructing a "property" object      
+        var formData = new FormData();
+
+        //let property = {},  //commented out from previous approach
+        let x;
+
+        for (let i of event.currentTarget) {
+            //if (i.value) { property[i.name] = i.value; }  //commented out from previous approach
+            if (i.value) {formData.append(i.name, i.value);}
+        }
+        //property.landlord_id = event.currentTarget.getAttribute('data-uid');  //commented out from previous approach
+        formData.append("landlord_id", event.currentTarget.getAttribute('data-uid'));
+
+        if (x = event.currentTarget.getAttribute('data-id')) {
+            //property.id = x;  //commented out from previous approach
+            formData.append("id", event.currentTarget.getAttribute('data-id'));
+        }
+
+        formData.append('file-to-upload', file);
+
+
+        $.ajax({
+                url: '/',
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                data: formData, //property //commented out from previous approach
+                contentType: false,
+                cache: false,
+                processData: false
+            })
+            .then(r => {
+                window.location.href = r;
+            });
+
+    });
+    </script>
 </body>
 
 </html>
